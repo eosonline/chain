@@ -11,7 +11,7 @@
     <description>
         An example for phonegap build docs.
     </description>
-
+    <access origin="*" />
     <author href="https://yichihui.com" email="zkm@yichihui.com">
         张康民
     </author>
