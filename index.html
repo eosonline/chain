@@ -20,81 +20,13 @@
 
 </body>
 <script>
-    var http=require('http')
-    var fs=require('fs');
-    var gui=require('nw.gui');
-    var unzip=require('unzip');
-    var app=gui.App
-    var version;
 $(document).ready(function(){
-    version=JSON.parse(fs.readFileSync('version.json',{encoding:'utf-8'}))
-    console.log(version)
-    var p=[]
-    p.push(video_play_ready())
-    p.push(local_proc_ready())
-    Promise.all(p).then(()=>{window.location.href='dlogin.html'})
-    $("body").on('tap',function(){
-        if(confirm('你确定要退出程序吗？')){
-            app.quit()
-        }
+    $("video")[0].play()
+    $("video")[0].addEventListener("ended",function(){
+            window.location.href='dlogin.html'
     })
 })
-    function is_exist(path){
-        var rtn=new Promise((resolve,reject)=>{
-            fs.exists("/run/"+path, function(exists) {
-            if(exists){resolve()}
-            else{reject()}
-            })
-        })
-        return rtn
-    }
-
-    function video_play_ready(){
-        var rtn=new Promise((resolve,reject)=>{
-            $("video")[0].play()
-            $("video")[0].addEventListener("ended",function(){
-                if(navigator.platform=='MacIntel'){
-                window.location.href='dlogin.html'
-                }
-                resolve()
-                $(".pre_load").html('您的网速有点慢，请稍等，或者点击屏幕，重启程序')
-            })
-        })
-        return rtn
-    }
-    function local_proc_ready(){
-        var rtn=new Promise((resolve,reject)=>{
-            fs.exists('/run',function(exist){
-                if(!exist){fs.mkdirSync('/run')}
-                if(!fs.existsSync('/run/version.json')){
-                    fs.copyFileSync('version.json','/run/version.json')
-                }
-                else{
-                    fs.copyFileSync('/run/version.json','version.json')
-                }
-                is_exist('ggxlh.data').then(()=>{
-                    var extract = unzip.Extract({ path:'.'});
-                    extract.on('error', function(err) {
-                        fs.unlink('/run/ggxlh.data')
-                        if(confirm('数据文件错误，系统将恢复初始状态，请进入收银系统后，重新进行升级操作！')){
-                            app.quit()
-                        }
-                        else{
-                            app.quit()
-                        }
-                    });
-                    extract.on('finish', function() {
-                        resolve()
-                    });
-                    fs.createReadStream('/run/ggxlh.data').pipe(extract);
-                })
-                    .catch(()=>{
-                    resolve()
-                    })
 
 
-            })
-        })
-        return rtn
-    }
+
 </script>
