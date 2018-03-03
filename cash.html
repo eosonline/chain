@@ -1,0 +1,694 @@
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,maximum-scale=1, user-scalable=no">
+    <title>壹尺生活 精彩无限</title>
+    <link rel="stylesheet" href="css/my.css"/>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/buttons.css"/>
+    <link rel="stylesheet" href="css/font-awesome.min.css"/>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src='js/my.js?ver=1.0'></script>
+    <script src="js/fly.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/spop.min.css">
+    <script type="text/javascript" src="js/spop.min.js"></script>
+</head>
+<script>
+    if(window.localStorage.getItem('shop_id')==null){window.location.href="dlogin.html";}
+</script>
+<body style="overflow:hidden;background-size:cover;background-image: url('images/green.png');font-family:'Microsoft YaHei', 微软雅黑, 宋体">
+<audio src="wav/6.wav" preload="auto" loop="loop" id="order_mp3"></audio>
+<audio src="wav/486.wav" preload="auto" id="error_mp3"></audio>
+<audio src="wav/1525.wav" preload="auto" id="cash_box_mp3"></audio>
+<audio src="wav/6005.wav" preload="auto" id="ok_mp3"></audio>
+<audio src="wav/click.wav" preload="auto" id="click_mp3"></audio>
+<audio src="wav/gugudu.wav" preload="auto" id="warn_mp3"></audio>
+<audio src="wav/ask.wav" preload="auto" id="ask_mp3"></audio>
+<audio src="wav/welcome.wav" preload="auto" id="welcome_mp3"></audio>
+<audio src="wav/thanks.wav" preload="auto" id="thanks_mp3"></audio>
+<audio src="wav/win.wav" preload="auto" id="ready_mp3"></audio>
+<audio src="wav/ready.wav" preload="auto" loop="loop" id="wait_mp3"></audio>
+
+<div class="F1" style="position: absolute;width: 100%;height: 100%;z-index: 11;display: table;background-size:cover;background-image: url('images/green.png')">
+    <div style="display:table-row;padding: 2rem">
+        <div style="display: table-cell;vertical-align: middle;text-align: center;font-size: 2rem;color:#EEEEEE;padding: 2rem">
+            <img src="images/yichi.png" class="img-circle" style="width: 10rem">
+            <p></p>
+            <p>请等待,系统正在初始化。</p>
+            <div class="F1_msg" style="font-size: 1rem;height: 10rem"></div>
+        </div>
+    </div>
+</div>
+<div class="main disnone">
+    <div class="container-fluid">
+        <div class="row" style="padding-top: 1rem">
+            <div class="col-sm-7" style="text-align: right">
+                <div class="row">
+                    <div class="col-sm-2 no-gutter" style="display: flex;margin: 0 auto;text-align: center">
+                        <div style="display:flex;margin: 0 auto;text-align: center;height: 7rem;width:7rem;margin-left:1rem;background-color: white;padding:0.25rem" >
+                            <div class="net_sign" style="font-size:2rem;background-color:#009933;width: 100%;height: 6.5rem;line-height:6.5rem;color: white;">
+                                网单
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-10" id="ai_1" style="margin: 0 auto;text-align: center;display: flex;margin-left: -3rem">
+                        <div class="button-group" style="margin-left: -0.5rem" >
+                            <button type="button" class="button button-primary button-rounded button-raised order_sel" style="height: 8rem;line-height: 8rem;font-size: 2rem;font-weight:400;width: 5rem">1</button>
+                            <button type="button" class="button button-rounded button-raised order_sel" style="height: 8rem;line-height: 8rem;font-size: 2rem;font-weight:400;width: 5rem">2</button>
+                            <button id="aiyougou" type="button" class="button button-rounded button-raised order_sel" style="height: 8rem;line-height: 8rem;font-size: 2rem;font-weight:400;width: 5rem">3</button>
+                        </div>
+                        <button type="button" class="button  button-rounded goods_refund" data-goods_refund="1" style="padding:0;margin-left:1rem;height: 8rem;width:7rem;line-height: 8rem;font-size: 2rem;font-weight:400;font-family: 'Microsoft YaHei', 微软雅黑, 宋体">退货</button>
+                        <button type="button" class="button button-caution button-rounded del_bill" style="padding:0;margin-left:1rem;height: 8rem;width:7rem;line-height: 8rem;font-size: 2rem;font-weight:400;font-family: 'Microsoft YaHei', 微软雅黑, 宋体">删单</button>
+                        <button type="button" class="button button-rounded" id="ai_clock" style="background-color: #000000;color: green; padding:0;margin-left:1rem;height: 8rem;width:10rem;line-height: 2rem;font-size: 1.5rem;font-weight:400;font-family: 'Microsoft YaHei', 微软雅黑, 宋体"><span id="date_show">2017-12-22</span><br><span id="time_show">23:45:34</span></button>
+                        <button type="button" class="button button-caution button-rounded fake_btn" style="position: absolute;padding-top: 10px;z-index: -1;opacity: 0"></button>
+
+                    </div>
+
+                    <div class="input-group" style="padding: 1rem;padding-right: 1.45rem;">
+                        <div class="input-group-addon ask-key" style="border-radius: 1rem 0 0 0 ;font-size: 4rem" ><i class="aw-icon-th"></i><br><span style="font-size: x-small">数字键盘</span></div>
+                        <div style="background-color: #eeeeee;width: 100%"><div id="barcode"  class="keydiv key_active nowrap"></div></div>
+                        <!--<input id="barcode" type="text" class="form-control" placeholder="商品扫码" style="text-align:center;font-size:3rem;line-height: 7rem;height: 7rem;" >-->
+                        <div class="input-group-addon change_count" data-change="minus" style="font-size: 4rem;padding-left: 2rem;padding-right: 2rem"><i class="aw-icon-minus"></i></div>
+                        <div class="input-group-addon" style="font-size: 4rem;width: 10rem">
+                            <div class="keydiv" id="in_count" style="height:6rem;line-height:6rem;width: 9rem;text-align: center;border: none" data-template='<div class="popover" role="tooltip" style="text-align:center"><div class="arrow"></div><h1 class="popover-title"></h1><div class="popover-content" style="font-size:2rem;background-color:red;color:white"></div></div>'  data-toggle="popover" data-placement="bottom" title="❌" data-content="数量格式错误！">1</div>
+                        </div>
+                        <div class="input-group-addon change_count" data-change="plus" style="font-size: 4rem;padding-left: 2rem;padding-right: 2rem;border-radius: 0 1rem 0 0 "><i class="aw-icon-plus"></i></div>
+                    </div>
+                    <div style="padding: 1rem;padding-right: 1.45rem;padding-top: 0;margin-top: -1rem;z-index: 8" class="left_move">
+                        <div class="top_div" style="padding: 1rem;text-align: left;background-color: #DDD;height:calc(100% - 24.8rem);overflow: auto;border-radius: 0 0 1rem 1rem;">
+                            <div style="position:absolute;display:table;width:calc(100% - 2rem);height:calc(100% - 2rem);opacity: 1;margin-top: 9rem;margin: 0 auto;text-align: center;z-index: 1">
+                                <div style="display: table-cell;vertical-align: middle;color: darkgray" class="pad_swipe">
+                                    <img src="data:image/png;base64,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">
+                                    <p>左右滑动，可切换订单</p>
+                                    <p>新增、修改商品，请使用外接键盘，或调出系统软键盘。</p>
+                                </div>
+                            </div>
+
+                            <table class="all_tmp table table-striped table-bordered table-condensed" style="position:relative;cellspacing:1px;font-size: 3rem;color: #424242;overflow-y: auto;margin-bottom: 1rem;z-index: 2">
+                                <thead style="background-color: rgba(0,153,51,0.67);color: white;font-size: 2rem" class="tmp_list">
+                                <td align="center" style="width: 55%">商品名</td>
+                                <td align="center" style="width: 15%">单价</td>
+                                <td align="center" style="width: 10%;">数量</td>
+                                <td align="center" style="width: 15%">小计</td>
+                                <td align="center" style="width: 5%"></td>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-5" >
+                <div style="font-size: 2rem;padding: 0px;color: white;margin-right: -2rem;margin-left: -1rem">
+                    <div class="col-sm-2 no-gutter" style="background-color:black;height:8rem;line-height:7rem;color:#009933;text-align: right;border-radius: 1rem 0 0 1rem">数量</div>
+                    <div class="col-sm-3 no-gutter total_count" style="background-color:black;height: 8rem;line-height:7rem;font-size: 4rem;text-align: center">0</div>
+                    <div class="col-sm-2 no-gutter" style="background-color:black;height:8rem;line-height:7rem;color:#009933;text-align: center">合计</div>
+                    <div class="col-sm-5 no-gutter total_price" style="background-color:black;height: 8rem;line-height:7rem;font-size: 4rem;text-align: center;border-radius: 0 1rem 1rem 0">0.00</div>
+                </div>
+                <div style="display:table;width: 100%;height:calc(100% - 16.75rem);padding-top:1rem;margin: 0 auto;text-align: center">
+                    <div style="display: table-row">
+                        <div style="display: table-cell;vertical-align: middle" class="pad_swipe">
+                            <div style="padding-bottom: 1rem"><button class="btn btn-lg btn-danger btn-block" style="height: 6rem" id="last_30_btn">调整订单收银类型</button></div>
+                            <div style="width: 100%;margin: 0 auto;text-align: center" class="logout btn btn-lg btn-primary btn-block">
+                                <img  class="mmm" style="width: 4rem;height:4rem;border-radius:2rem;">
+                                <span style="font-size: 2rem">交接班</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="display: table-row">
+                        <div style="display: table-cell;vertical-align: middle" class="pad_swipe">
+                            <img style="opacity: 0.5" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAQAAABpN6lAAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QAAKqNIzIAAAcUSURBVHja7Zx5bFVFGMV/rQUsFmRpAL+IQDECKqDIEokiVRRUlIigQYkgmiiuEeMeQRIloolC4oJEXIKJYkQQZXFjN4AoUlwgIoJGPijiXqEs8vwDbN57HfD13lmsvad/vPfOvXfunNOZuXeWbyBBggQJEiRIkCBB3URe/CS0I7fzDU/KgdBioqAgtvyWrAdgJy+HFhMF+THl5zHz0NcRoaVEQ8wqoNfxfNWPAvkrp2u60JgiGlJIfQrIJ8V+9lLJLiqokDW1yABty+a0n23k+2pnnEF7TqYL3WhT4+R3sIYyvuQbVkrqP2iA5rGWLmnEEJkJoD3oTikDKbSc1wV8wGqW221s4xgwgpcyiOk0ZaBl0WZ8xBsskc+CGqAt2e5F7JHwA1OYH6/ViG7ATAZHvusvlPMzf7CLfRwgj3oUUkRTWtAiUnpLmcLbUuHRAD2LZTme+iUrWMcmVNbW6A4daE0Jp9CLXjle0krK/RlQltH8ZeNT5rKKMtkaLXXD/Y6hJ93pz3lHOOkFuc6fATO4wkDvZBjLZI8t2cY7Q2/6MpxO1Q5tlhJ/BjRmMiMNBxpFq4mR8tCZ8xnNiVXEocewFwMAtCVjuDuL7Gbn4VSDXORRyjBSTJVP/N754O2b6QRNpf3dESAToaEt9OkqAxaGzk1NEbM3CCA75Gba8x4A74cWFBDaWXuGzkOCGsPCkFhUaFOG0p0feEvKQtsQQv6gtGfHHD06VD4sNIKR5PdgdtrPS7I61h4RpApoHjsoziIN40k+EKYEnFRNPpweJCeBDBhu4GwPoOWIAFVA8zGNHvcI8i4fpAScamS/CCE/jAHXGrgZUhnGAO9VQAvYZ6BLZXEYA/yXgNOM7Kow8kMYcIOBmy27QxnguQpofUwjhufLB6EM8F0CzB3mFaHk+zfgZgM3T/4MZ4DXKqCF7DLQF8qCcAb4LQG9jezycPJ9G2AaM/7Q30xCYAO0iIsN9KSQ8v2WgL5GdmndMeAuA7dcfq8jBmgT+hjoJ8LK91kC+hnZRXXHgAcM3Gr5tY4YoMXGXuDjoeX7KwEXGdkPQ8v39iqsm6i+emOddA0t31MJ0OMwLV6ZGFq8NwO41Mi+F1o8eKkCCjtpXo3+WjqEFg8W4gVywAkG+TDhny/ailEMoJzpzJH/pQGXG9lDYwDar2pVyRDWaw/fgyPOq4Dmsddg83fSFkBbkzkl+qzc5NcA941gibGUPXzo8/4sfrRf+T4MGGZk5wJoe270LTgbjqvAYSZCy2klKCzmnOxD4nmg3nUJMD/qxgvAOdXl57wG3RpcPwWuMbKLQAuMXeFHDn5oMZfQFWWeOJ41dlrg9Cj2Gw/M4nZG8ZDhSKFUgo7kxSrmVUbIPpzBbQnofBj+Mi4z8lOlEnRAmnwYxh7jhLolOGgDtKtO1jsBqGkAw3bQfOZnsSM1QhxArrBcArQfcygEOoDW45YaXj5Wi42RKGfzbS0wQBvwXFUA7UagW4REzO+BjV3Jt2iAFvFxVRjLPZICiy85a90ZYOkpoPX5JK3JaydbtAH2Vv00kL2uDLDVCD6TJr+CLZBzsNu/Y7I7+ZYM0EEZ7f19AnCrtTxOdSffzg4Sx/JrBnG8bNWG2OvX50tKT2Miu1nLa7LBrgE2SsC9mX6wFTjLWg5vkxRwCxcwiHGs19vsGhC7BGhzdmYQ18s00AX0t5TD42R71sqSvrLEngHxS8CorN/vgDayJr9MtgOlGdwz9uTH30Mkn8cyiA1SDpxrLX/bABibwZ1s04C4L0LZEbxbALjHWv4G6Os0yHqkWu0gxzUge8eIAfoK9TjTYg6HVmMetGlA3F1kvjJEcbtGkc2h87iNoH/50+zOHASKGouByXaTq20G7LEdWVLbDBhte0ul2mbAm7YTrF0GTJff6rYBj8VPojYb8KOL0Lq4BvjcRfImF8sn4howzaMBc10kGteACDv3RMR4N5FlcfsCzfjJkwEi21wkG7MEyM/4ifqf5Ua+jafAI14MGOcq4fgGvOVB/gY+/88aIOWsdG7AaHfrB228CN3nWH6ly7giGwa4Dnu60uWm3Tb2EjtwmPUetjDPZeJ2+gJzsibHbGKI7I+fyOFha3q8l7OmMMcNu6PCUm9QVtmdr6nCxW7lW1wmp4VUWO9cf0c7d7uKH4S1LMtuOlrP3WDX8q0OiMhGw9LXOJjmY6t9yytFtT/2NkNoYn8EsDos11p51xghHAV9fMh3MCYoyziR+IuarhVP68YdDIrKJprwVKwkhshLfuQ7XC2uvVhIw0iX9vH13weHw+KyiiKuqvFlFZT4lO90XkBS8ioFXEHug5mTKJbNOZ9tBV4idLQbY7j6X07ayJW+N2b3ZgCA5lPKSONmmvAmj8pq/+K9GpBmRG86UUJzUuxgA2Wuo4ISJEiQIEGCBAkSGPE3D6yuua2LLzUAAAAldEVYdGRhdGU6Y3JlYXRlADIwMTctMDMtMThUMDc6MTk6MjIrMDg6MDAYpX/DAAAAJXRFWHRkYXRlOm1vZGlmeQAyMDE3LTAzLTE4VDA3OjE5OjIyKzA4OjAwafjHfwAAAABJRU5ErkJggg==">
+                        </div></div>
+                    <div style="display: table-row">
+                        <div style="display: table-cell;vertical-align: middle" class="pad_swipe">
+                            <div class="row" style="padding: 0.5rem">
+                                <div class="col-sm-6"><button class="btn btn-lg btn-warning btn-block" style="height: 6rem" onclick="print_namecard()">打印本店名片</button></div>
+                                <div class="col-sm-6"><button class="btn btn-lg btn-success btn-block sys_setup" style="height: 6rem">其他系统设置</button></div>
+                            </div>
+                            <div class="row" style="padding: 0.5rem">
+                                <div class="col-sm-6"><button class="btn btn-lg P_ON_bt btn-block " style="height: 6rem">打印机状态:关</button></div>
+                                <div class="col-sm-6"><button class="btn btn-lg btn-block debug_mode" style="height: 6rem">打印机调试:关</button></div>
+                            </div>
+                            <!--
+                                                        <div style="padding: 0.5rem"><button class="btn btn-lg btn-primary btn-block" style="height: 6rem" id="print_bc_btn">打印左侧商品价签</button></div>
+                            -->
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="font-size: 3rem;text-align: center;width:100%;color:white;position: absolute;bottom:0;height:6rem;line-height:6rem;display: flex">
+        <div style="padding-left:3rem;padding-right:3rem;background-color:#013e15;height:6rem;z-index: 10" class="dropup">
+            <img src="data:image/png;base64,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" class="net_status" style="width: 2rem"><span> </span><span class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="shop_name">国美六帮超市</span><div class="point" style="display: none"></div>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu2" style="text-align: center">
+                <li style="background-color: #009933;color:white;font-size: 2rem;margin-top: -10px;margin-bottom: -10px"><span>选择操作</span></li>
+                <!--<li style="font-size: 2rem;color: white;background-color:#e20000;margin:-10px 0 0 -10px;" onclick="{if(window.navigator.onLine){window.location.href='dinit.html'}else{_alert('离线状态无法初始化')}}"><span>初始化系统</span></li>-->
+                <li style="font-size: 2rem;color: black;margin: -10px" onclick="{ window.location.href='dlogin.html'}"><span>退出登录</span></li>
+                <li style="font-size: 2rem;color: black;margin: -10px" onclick="{_confirm('操作确认','你确定要退出收银系统吗？').then(()=>{if(nwjs){app.quit()}else{window.opener=null;window.open('','_self');window.close()}  })}"><span>关闭收银</span></li>
+                <li role="separator" class="divider"></li>
+                <li style="font-size: 2rem;color: black;margin: -10px" onclick="{refresh_goods()}"><span>强制刷新商品</span></li>
+                <li style="font-size: 2rem;color: black;margin: -10px;position: relative" id="sys_update"><span>更新并重启</span><div class="point" style="display: none"></div></li>
+            </ul>
+        </div>
+        <div class="jtr" style="z-index: 10"></div>
+        <div style="background-color:rgba(255,255,255,0.3);position:absolute;left:0;bottom:0;width:100%;height: 6rem;color:white;z-index: 8;line-height: 5rem"></div>
+        <div class="sys_div" style="position:absolute;bottom:0;left:0;width:100%;height: 6rem;color:white;z-index: 9;line-height: 5rem;text-align:center;margin-left: 5rem">
+            <div id="sys_info" style="margin:0 auto;overflow: hidden;height: 6rem;margin-left:100%;line-height: 6rem;"><span style="color: #013e15;text-shadow: 0 1px 0 white;font-size: 3rem;font-weight: 900;"></span></div>
+            <div id="sys_info1" class="disnone" style="overflow: hidden;height: 6rem;line-height: 6rem;padding-top: 0.5rem;padding-bottom: 0.5rem;display: inline-flex;float:right;margin-right: 6rem">
+                <div style="background-color: white;width:30rem;height: 5rem;display: inline-flex;padding-left: 1rem;padding-right: 1rem;border-radius: 0.5rem;justify-content:center">
+                    <img style="height: 5rem" src="data:image/gif;base64,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">
+                    <spanƒ style="font-size: 2rem;line-height: 5rem;color: darkgreen">重量</spanƒ>
+                    <span style="font-size: 3rem;line-height: 5rem;color: darkred" class="scale_weight">12.000</span>
+                    <span style="font-size: 2rem;line-height: 5rem;color: darkgreen">千克</span>
+                </div>
+                <div class="scale_price_div" style="background-color: white;width:20rem;height: 5rem;display: inline-flex;padding-left: 1rem;padding-right: 1rem;border-radius: 0.5rem;margin-left: 1rem;justify-content:center">
+                    <span style="font-size: 2rem;line-height: 5rem;color: darkgreen">单价</span>
+                    <span style="font-size: 3rem;line-height: 5rem;color: darkred" class="scale_price">12.00</span>
+                    <span style="font-size: 2rem;line-height: 5rem;color: darkgreen">元</span>
+                </div>
+                <div style="background-color: white;width:20rem;height: 5rem;display: inline-flex;padding-left: 1rem;padding-right: 1rem;border-radius: 0.5rem;margin-left: 1rem;justify-content:center">
+                    <span style="font-size: 2rem;line-height: 5rem;color: darkgreen">合计</span>
+                    <span style="font-size: 3rem;line-height: 5rem;color: darkred" class="scale_total">120.00</span>
+                    <span style="font-size: 2rem;line-height: 5rem;color: darkgreen">元</span>
+                </div>
+                <div class="btn btn-lg btn-danger up_scale" style="margin-left: 1rem;line-height: 3.5rem;width:15rem">提交</div>
+            </div>
+        </div>
+    </div>
+    <div style="position: absolute;background-color:rgb(237,237,237);z-index: 10;top:10rem;right:-41.5%;height:calc(100% - 16.75rem);width:41.3%;border-radius: 1rem 0rem 0rem 1rem" class="abs_scale">
+        <div style="height: 5rem;line-height: 4rem;font-size: 2rem;color: white;text-align:center;border-radius:  1rem 0 0 0 ">
+            <div class="row" style="margin-left: 0">
+                <div class="col-sm-6 no-gutter scale_menu" style="background-color: #EEEEEE;color: black;border-radius:  1rem 0 0 0 ">
+                    称重商品
+                </div>
+                <div class="col-sm-6 no-gutter no_bn_menu " style="background-color: gray;color: black">
+                    <span>自有商品</span><span class="fast_query" style="color: red;display: none"><i class="aw-icon-refresh"></i>点我恢复</span>
+                </div>
+            </div>
+        </div>
+        <div style="padding:1rem;height:calc(100% - 10rem);background-color:#EEEEEE;overflow-y: auto;overflow-x: hidden;display:flex;flex-wrap: wrap;align-content: flex-start;" id="scale_goods_list" >
+
+        </div>
+        <div style="padding:1rem;height:calc(100% - 10rem);background-color:#EEEEEE;overflow-y: auto;overflow-x: hidden;display:flex;flex-wrap: wrap;align-content: flex-start;" id="no_bn_goods_list" >
+
+        </div>
+        <div style="height: 5rem;line-height: 5rem;font-size: 2rem;background-color:#009933;color: white;text-align: center;border-radius: 0 0 0 1rem  " class="close_abs_scale">
+            <span class="glyphicon glyphicon-arrow-right"></span> 点我，或向右滑动关闭
+        </div>
+    </div>
+    <div style="position: absolute;background-color:rgba(40, 159, 246, 1);z-index: 9;top:10rem;right:-40.5%;height:calc(100% - 16.75rem);width:41.3%;border-radius: 1rem 0rem 0rem 1rem" class="abs">
+        <div class="container-fluid" style="padding-right: 10px;margin-top: 0.5rem;padding-left: 2rem">
+            <div class="row">
+                <div class="col-sm-9">
+                    <div class="row">
+                        <div class="col-sm-4 no-gutter mkey" data-key="1">
+                            <div class="keypad">1</div>
+                        </div>
+                        <div class="col-sm-4 no-gutter mkey" data-key="2">
+                            <div class="keypad">2</div>
+                        </div>
+                        <div class="col-sm-4 no-gutter mkey" data-key="3">
+                            <div class="keypad">3</div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4 no-gutter mkey" data-key="4">
+                            <div class="keypad">4</div>
+                        </div>
+                        <div class="col-sm-4 no-gutter mkey" data-key="5">
+                            <div class="keypad">5</div>
+                        </div>
+                        <div class="col-sm-4 no-gutter mkey" data-key="6">
+                            <div class="keypad">6</div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4 no-gutter mkey" data-key="7">
+                            <div class="keypad">7</div>
+                        </div>
+                        <div class="col-sm-4 no-gutter mkey" data-key="8">
+                            <div class="keypad">8</div>
+                        </div>
+                        <div class="col-sm-4 no-gutter mkey" data-key="9">
+                            <div class="keypad">9</div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4 no-gutter mkey" data-key="00">
+                            <div class="keypad">00</div>
+                        </div>
+                        <div class="col-sm-4 no-gutter mkey" data-key="0">
+                            <div class="keypad">0</div>
+                        </div>
+                        <div class="col-sm-4 no-gutter mkey" data-key=".">
+                            <div class="keypad">.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3" style="margin-left: -1rem;padding-right: 0">
+                    <div class="no-gutter mkey" data-key="b">
+                        <div class="keypad" style="padding:0;display:table;width:100%;height:calc(36% + 1rem);background-color: #f3ab26;color: gray">
+                            <div style="display: table-row;text-align: center"><i style="display:table-cell;vertical-align: middle" class="glyphicon glyphicon-arrow-left"></i></div>
+                        </div>
+                    </div>
+                    <div  class="no-gutter mkey" data-key="e">
+                        <div class="keypad" style="padding:0;display:table;width:100%;height:calc(36% + 1rem);background-color: #c70f0f;color: #f9f9f9">
+                            <div style="display: table-row;text-align: center;width:100%;"><span style="display: table-cell;vertical-align: middle;border-bottom-color:white;border-bottom-width:1px;border-bottom-style: solid;font-size: 2.5rem">确认</span></div><div style="display: table-row;text-align: center;width: 100%;height: 50%"><span style="display: table-cell;vertical-align: middle;font-size: 2.5rem">结账</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3 no-gutter">
+                    <div class="keypad print" style="height: 15%!important;padding-top:calc(12% - 1.5rem)!important;background-color:#f3ab26;color: whitesmoke;margin-right: 0.5rem;margin-left: 0.25rem" onclick="print_prev()">
+                        <div style="padding-top: 1rem;padding-bottom: 1rem"><i class="glyphicon glyphicon-print"></i></div>
+                        <span style="font-size:small;">补小票</span>
+                    </div>
+                </div>
+                <div class="col-sm-6 no-gutter mkey" data-key="r">
+                    <div class="keypad no_bn " style="padding-top:2rem;padding-bottom:2rem;height: 15%!important;background-color: #007426;color: whitesmoke">
+                        称重|自有
+                    </div>
+                </div>
+                <div class="col-sm-3 no-gutter">
+                    <div class="keypad cash_box" style="height: 15%!important;padding-top:calc(12% - 1.5rem)!important;background-color: #0000b4;color: whitesmoke;margin-right: 1rem;margin-left: 0.25rem" onclick="open_cash_box()">
+                        <div style="padding-top: 1rem;padding-bottom: 1rem"><i class="glyphicon glyphicon-hdd"></i></div>
+                        <span style="font-size:small;">开钱箱</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="confirm_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" style="margin-top: 10%">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header" style="text-align: center;background-color: #009933">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title"  style="font-size: 3rem;color:white">标准提示警告弹出框</h4>
+                </div>
+                <div class="modal-body" style="font-size: 2rem;padding: 2rem">
+                    <p>1、默认来此</p>
+                    <p>2、ESC关闭</p>
+                    <p>3、默认回车提交</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" style="width: 12rem;height: 6rem;font-size: 3rem">取消</button>
+                    <button type="button" class="btn btn-danger m_ok" style="width: 12rem;height: 6rem;font-size: 3rem">确认</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="ban" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+        <div class="modal-dialog" role="document" style="width: 90%">
+            <div class="modal-content">
+                <div class="modal-header" style="text-align: center">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title"  style="color: #e2000e;font-size: 3rem">营业交班资金清点</h4>
+                </div>
+                <div style="text-align: center"><h4><span style="color: darkgrey">请认真填写当班记录，在您填写确认后，系统将打印交接班凭证，并退出银台，再由接班营业员登录</span></h4></div>
+                <div class="row" >
+                    <div class="col-lg-7"><div class="modal-body" style="font-size: 2rem">
+                        <form class="form-horizontal">
+                            <div class="form-group">
+                                <label for="new_name" class="col-sm-4 control-label">清点现金收入</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control ban_all" id="ban_cash" placeholder="清点现金总额，请扣除底钱" value="0.00" style="font-size: 2rem;height: 4rem">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="new_name" class="col-sm-4 control-label">微信转账收入</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control ban_all" id="ban_wex" placeholder="清点当班微信转账额" value="0.00" style="font-size: 2rem;height: 4rem">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="new_name" class="col-sm-4 control-label">支付宝转账收入</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control ban_all" id="ban_ali" placeholder="清点当班支付宝转账额" value="0.00" style="font-size: 2rem;height: 4rem">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="new_name" class="col-sm-4 control-label">清点刷卡收入</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control ban_all" id="ban_card" placeholder="合计一下刷卡底单总额" value="0.00" style="font-size: 2rem;height: 4rem">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="new_price" class="col-sm-4 control-label">清点其他收入</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control ban_all" id="ban_other" placeholder="清点其他收入" value="0.00" style="font-size: 2rem;height: 4rem">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="new_price" class="col-sm-4 control-label">清点支出凭证</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control ban_all" id="ban_pay" placeholder="合计当班支出的金额" value="0.00" style="font-size: 2rem;height: 4rem">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="new_price" class="col-sm-4 control-label">填写备注信息</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" id="ban_memo" placeholder="其他事项请填写" style="font-size: 2rem;height: 4rem">
+                                </div>
+                            </div>
+                        </form>
+                    </div></div>
+                    <div class="col-lg-5" >
+                        <div class="container-fluid" style="margin-top:0.5rem;margin-right:5rem;height: 45rem">
+                            <div class="row">
+                                <div class="col-sm-9">
+                                    <div class="row">
+                                        <div class="col-sm-4 no-gutter mkey1" data-key="1">
+                                            <div class="keypad1">1</div>
+                                        </div>
+                                        <div class="col-sm-4 no-gutter mkey1" data-key="2">
+                                            <div class="keypad1">2</div>
+                                        </div>
+                                        <div class="col-sm-4 no-gutter mkey1" data-key="3">
+                                            <div class="keypad1">3</div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-4 no-gutter mkey1" data-key="4">
+                                            <div class="keypad1">4</div>
+                                        </div>
+                                        <div class="col-sm-4 no-gutter mkey1" data-key="5">
+                                            <div class="keypad1">5</div>
+                                        </div>
+                                        <div class="col-sm-4 no-gutter mkey1" data-key="6">
+                                            <div class="keypad1">6</div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-4 no-gutter mkey1" data-key="7">
+                                            <div class="keypad1">7</div>
+                                        </div>
+                                        <div class="col-sm-4 no-gutter mkey1" data-key="8">
+                                            <div class="keypad1">8</div>
+                                        </div>
+                                        <div class="col-sm-4 no-gutter mkey1" data-key="9">
+                                            <div class="keypad1">9</div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-4 no-gutter mkey1" data-key="00">
+                                            <div class="keypad1">00</div>
+                                        </div>
+                                        <div class="col-sm-4 no-gutter mkey1" data-key="0">
+                                            <div class="keypad1">0</div>
+                                        </div>
+                                        <div class="col-sm-4 no-gutter mkey1" data-key=".">
+                                            <div class="keypad1">.</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3" style="margin-left: -1rem;padding-right: 0">
+                                    <div class="no-gutter mkey1" data-key="b">
+                                        <div class="keypad1" style="padding:0;display:table;width:100%;height:calc(72% + 3rem);background-color: #f3ab26;color: gray">
+                                            <div style="display: table-row;text-align: center"><i style="display:table-cell;vertical-align: middle" class="glyphicon glyphicon-arrow-left"></i></div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer" style="text-align: center;margin-top: -5rem">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" style="width: 12rem;height: 6rem;font-size: 3rem;margin-top: -5rem">取消</button>
+                    <button type="button" class="btn btn-danger ban_ok" style="width: 12rem;height: 6rem;font-size: 3rem;margin-top: -5rem">确认</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="print_setup" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" style="margin-top: 5%">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header" style="text-align: center">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title"  style="color: #e2000e;font-size: 3rem">在此设置系统接口参数</h4>
+                </div>
+                <div class="modal-body" style="font-size: 2rem;text-align: center;padding: 1rem">
+                    <h4><span style="color: darkgrey">请勿随意设置更改，如不确定，请咨询工作人员。</span></h4>
+                    <form class="form-horizontal">
+                        <div class="row" style="margin-top: 1rem">
+                            <label  class="col-sm-3 control-label">选择打印机</label>
+                            <div class="col-sm-6">
+                                <select id="print_name" class="form-control" style="font-size: 2rem;height: 4rem">
+                                    <option value="0">网络错误，无法获取打印机列表</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-3 no-gutter" style="padding-right: 1rem">
+                                <button class="btn btn-primary" onclick="check_print_status()">测试打印机</button>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top: 1rem">
+                            <label  class="col-sm-3 control-label">选择规格</label>
+                            <div class="col-sm-9">
+                                <select id="print_mode" class="form-control" style="font-size: 2rem;height: 4rem">
+                                    <option value="54">58mm</option>
+                                    <option value="72">76/80mm</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top: 1rem">
+                            <label  class="col-sm-3 control-label">选择标签机</label>
+                            <div class="col-sm-9">
+                                <select id="print_barcode" class="form-control" style="font-size: 2rem;height: 4rem">
+                                    <option value="0">网络错误，无法获取打印机列表</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top: 1rem">
+                            <label class="col-sm-3 control-label">选择秤端口</label>
+                            <div class="col-sm-9">
+                                <select id="serial_port" class="form-control" style="font-size: 2rem;height: 4rem">
+                                    <option value="NONE">没有秤</option>
+
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top: 1rem">
+                            <label  class="col-sm-3 control-label">屏幕缩放</label>
+                            <div class="col-sm-9">
+                                <select id="zoom" class="form-control" style="font-size: 2rem;height: 4rem">
+                                    <option value="-1">小</option>
+                                    <option value="0">正常</option>
+                                    <option value="1">稍大</option>
+                                    <option value="1.5">大</option>
+                                    <option value="2">很大</option>
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" style="width: 12rem;height: 6rem;font-size: 3rem">取消</button>
+                    <button type="button" class="btn btn-danger print_setup_ok" style="width: 12rem;height: 6rem;font-size: 3rem">确认</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="new_goods_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" style="margin-top: 5%">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header" style="text-align: center">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="exampleModalLabel" style="color: #e2000e;font-size: 3rem">新增商品吗？</h4>
+                </div>
+                <div class="modal-body" style="font-size: 2rem;text-align: center">
+                    <h4><span style="color: darkgrey">请使用外接键盘，或者调出系统软键盘。</span></h4>
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label for="new_name" class="col-sm-3 control-label">商品条码</label>
+                            <div class="col-sm-9">
+                                <p><span id="new_bn" style="font-size: 2rem"></span></p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="new_name" class="col-sm-3 control-label">商品名称</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="new_name" placeholder="请输入商品名称" style="font-size: 2rem;height: 4rem">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="new_price" class="col-sm-3 control-label">销售价格</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="new_price" placeholder="请输入正确的销售价格" style="font-size: 2rem;height: 4rem">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label for="new_cat" class="col-sm-3 control-label">商品分类</label>
+                            <div class="col-sm-9">
+                                <select id="new_cat" class="form-control" style="font-size: 2rem;height: 4rem">
+                                    <option value="0">网络错误，无法获取分类</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top: 1.5rem">
+                            <label class="col-sm-3 control-label">商品属性</label>
+                            <div class="col-sm-9">
+                                <select id="new_pvt" class="form-control" style="font-size: 2rem;height: 4rem">
+                                    <option value="0">普通商品</option>
+                                    <option value="1">称重商品</option>
+                                    <option value="2">自有商品</option>
+                                </select>
+                                <div style="text-align: left;font-size: 1rem;margin-top: 1rem">
+                                    <div><span style="font-weight: 800">普通商品</span> - 指正常销售的一般商品。</div>
+                                    <div><span style="font-weight: 800">称重商品</span> - 和<span style="font-weight:900;font-style: italic"> 条码秤 </span>配套的称重销售商品，<span style="color: red">称重商品条码数字长度必须是7位。</span></div>
+                                    <div><span style="font-weight: 800">自有商品</span> - 指本店铺自定义的条码商品，不与其他店铺共享。</div>
+                                </div>
+                            </div>
+                        </div>
+                        <p><span style="color:red" id="#new_goods_alert"></span></p>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" style="width: 12rem;height: 6rem;font-size: 3rem">取消</button>
+                    <button type="button" class="btn btn-danger new_goods_ok" style="width: 12rem;height: 6rem;font-size: 3rem">确认</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="order_div" style="background-color:black;position: absolute;z-index: 8;top:10rem;right:-57%;height:calc(100% - 16.75rem);width:57%;border-radius: 1rem 1rem 1rem 1rem">
+        <div class="head order_esc" style="width: 100%;border-radius: 1rem 1rem 0 0">
+            <div class="row" style="margin-left: 0 !important;margin-right: 0 !important;border-style: solid;border-width:0 0 0px 0px;border-color: #009933">
+                <div class="col-sm-6 no-gutter" style="border-radius: 1rem 0rem 0 0;height:8rem;text-align:center;line-height: 8rem;font-size: 4rem;background-color: black;color:#009933">合计金额</div>
+                <div class="col-sm-6 no-gutter total_price" style="border-radius: 0rem 1rem 0rem 0;height: 8rem;text-align:center;line-height: 8rem;font-size: 8rem;background-color: black;color:white"></div>
+            </div>
+        </div>
+        <div class="order_cont" style="padding:1rem;width: 100%;height:100%;margin-top: -1rem">
+
+            <div class="row" style="text-align: center;font-size: 3rem;padding: 1rem">
+                <div class="col-sm-6" >
+                    <div class="row" style="border: solid;border-radius: 0.5rem 0 0 0.5rem;border-color: #009933;border-width: 1px;">
+                        <div class="col-sm-4" style="height:5rem;line-height:5rem;background-color:#009933;color:white;border: solid;border-color: #009933;border-width:0 1px 0 0">
+                            找零
+                        </div>
+                        <div class="col-sm-8 refund_price" style="height:5rem;line-height:5rem;color:white" >
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="row" style="border: solid;border-radius:0 0.5rem 0.5rem 0;border-color: #009933;border-width: 1px">
+                        <div class="col-sm-4" style="height:5rem;line-height:5rem;background-color:#009933;color:white;border: solid;border-color: #009933;border-width:0 1px 0 0">
+                            输入
+                        </div>
+                        <div class="col-sm-8 keydiv"  id="in_order" style="background-color:white;height:5rem;font-size:5rem;line-height:5rem;color:red;border-radius:0 0.5rem 0.5rem 0"></div>
+                    </div>
+                </div>
+            </div>
+            <div style="width: 100%;margin: 0 auto;text-align: center;margin-top: 0.5rem">
+                <div class="row">
+                    <div class="col-sm-4 pay_style" data-pay_style="0">
+                        <div class="pay_order_div">
+                            <div style="display: table-cell;vertical-align: middle">
+                                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAMAAACdt4HsAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAABm1BMVEUAAADYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgbYHgYAAABKyvfTAAAAh3RSTlMAXO/oVACdjEAzqpPSuG8IGJmYkQHcBXVCHfoSeoaGRUGLaXn4XpZyQHhAQbjh4FzhixlPTypP+EA9G3j6njoSWNQB+CaBCRxeQwC/cbJQGRDpymegyWRPPesDPAEDCBAZJTREV2wwCCvU9JOCjVeciQ4rI6PktKOPzbN/axgQOjEBTG9vSACBEN2ZAAAAAWJLR0QAiAUdSAAAAAd0SU1FB+EDGQg3G28MOCIAAAGLSURBVFjD7dZVc8JAFAXgrbu7pO4tLTVq1N3d3d2pu+Zvl7uk6WYIgb15KMxwnvbcZL8JmzxAiDduFB9fkSt+/ortAYF82yFBLBDMv18UQxggFAOEMUA4BojwBCAyyv59R8doALFMrDVO9YuJT3AMJP5Nkqw1GRYpzBOlpsEk3TEgCBm0ZgqCYK1ZsM5mf1MOTHK1ziCP1nxboUABCxT+F1AEi2Iv4OFACRIo1QbK3BEwGMpprTAacUClPKhCAtU1tNaaTNgzqFM9g3q9QINeoBEWTWYzFmiW7mrBAq1YQEobkQFFXAXaO3iATnugi+gDuolOoAcGvX1ooB/6wOAQFhimfUREA6NQx0R+YHyC1klap1wFpmdm5+QRDOYXYLUougwQsrS8srq2vrG5tQ2DHbi2K/4Ce06B/QPFHYf02hEsj+ny5JTNmdoZKHIOly5s60uiGVXAQnMltWtbtdzIuXX6BE7iXv9U7zDAPQM8YIBHBnjCAM/se3zh3/+q/BLe3j948vn1TbyR8gPcASXV0WPhFQAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAxNy0wMy0yNVQwODo1NToyNyswODowMJ3YD4AAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMTctMDMtMjVUMDg6NTU6MjcrMDg6MDDshbc8AAAAAElFTkSuQmCC" style="width:4rem;margin: 0 auto;margin-top: -1rem">
+                                <div style="font-size: 2rem;color: red;">现金收入</div>
+                                <div class="pay_select" style="background-color:red;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4  pay_style" data-pay_style="5">
+                        <div class="pay_order_div">
+                            <div style="display: table-cell;vertical-align: middle">
+                                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAABmJLR0QAAAAAAAD5Q7t/AAAFK0lEQVR42u2abYhVRRjHf3e7mJVtvpT2svlSyZImFsRkRDhC9LKEOYlFfvBDWZK9aQaKuFFtVqhYsZakW7T0QsLi5IcUimqM2GoSirIsKYxetszStCJSqT7MOXH37j17z7l39s5u7e/T7jlznvP8n5l7ZuaZBwYZZJD/M7m+foHU4gLgImA6MAMYk+KxvcCbwHbgPaPsBwMmAFKLU4E5wN3AeI+m9wBrgQ6j7A/9KgBSixxwPfAY6Xq4Wr4HFgObjLLhAiC1GAosAh6ugegklgKPG2X/rFkAoh5fAKwPKLyYBcCGrCMicwCij1onMDS04hL8BlxqlP3QewCiXl8GPBRaZQqWAqvSjIZUAZBanAS8AlwSWlkGtgMzjbKHqgqA1KIB+Ca0mgo5DEwwynZVFACpxTjgq9AqPDDWKFuyExMDILUYA3hbcPQDRhtl9xVfrEsQfxzwUWiPPVNyOV2X0HgDMDq0x57YB1xNwrK8x09AajEb6AjttQc6cfsRa5T9O6lRtwBILUYCP4f2vEqeB1qMsruLb0gtxgPtwCyj7AGAfFGbgbDISWIl0GqU3VtCeB5YDtwfXWoBboeCERBFZ09oFRVwK/CCUfbXUjelFlcBW0vcGmeU/bpwBCwPrSQDh4B5wFaj7JEE4WcDzwEXJ9hYBizMRY3rgYOhVaVgB3AX8E7Sh01qMQRoBlaksFcfj4ArQisrwybgPqPsZ701klrMBLZksHt5HIDFoRUmsAqX7OjqrZHUohF4CTg/o/1FuSir80eFDt6G23V1AvUehd8JtJfbyUktTsB92ZdU+qI6YGwVjk43yn4CnAI8VaXow7hk6rFG2dYU4q/DJUAqFg+Qk1rMAnQVNkYZZfdHTl0DvJzx+Y9xc/LbRtm/yjWWWkyJ3nFWNcJj8sCkKm0sBB4EMMpukVqciZt3p5R5TgPN0Qgqi9RiBPAIcIsP4TE5qcVGYH6VduoLFyJSC3C92lqi7aPAWqPstymFA9wIPO1TeEweGOXBzvxIGABRLm6d1ELjVmpNwFvAA/HPJaX4acCrwIl9IR7cCNDALA+2hhllf/fhlNTiNGAdcG1fCY/JAwc82ZpHlecEUotjcGuS1X0tPKYOfzm/J6M1RaXirwSO1lI8uBGwy6O9ucAzGYU34vbwF9ZSeExOajEZ2OnR5tA053TRBqwFt+oLRh7/OYA5uB5NEg5wE9AWUnhMvB3eCUz2aHdIqX261GIG8Do1KMxIyc44K7zGs+Fu05fU4lypxbvAG/1IPMCaeASMAn7ybHwYMBK3fJ0bWmkCJxfmBDuA2aE9qiEdRtk5hQcjzaE9qjH3QsHJkFF2F7A5tFc1YnOkt8fRWNA5uYb8q7NbAIyy3+F5v90PWRDp7BmAiDZckeJ/EQNsLLxQck6WWgzH3y6xPzHCKPtL4YWSx+NRo3NCe+uZicXiEwMQBeFLYGporz0x1Sj7RakbaYqkJgGpEpf9lPN6S7zWlXvaKPspcAau0mIgsR9oKJd1LhuAKAhdQAOudGYg0AacXjjdJVFJqeyLwA2hFfZCk1F2W9rGqUZAERNDK0xgNXB8FvGQcQREpSZHsjxTA57FnTClOmgpJp+x/YTQagtYAazPctDiIwBNKdqsxB2V39EHop/AHZu/78tglnJ5gB9xR+GluAdXzHC04JkhuOqTGbjgNWbwbTewDZdGe80oW2kNg7cAJFWNtwNLjLIDsr4wy09gWtH/B4HLjLI7QouohizT4OcFf98MDB/o4gcZZBD+Abvbctpw9wLqAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDE3LTAzLTI1VDAzOjU3OjQ4KzA4OjAwTsMZcAAAACV0RVh0ZGF0ZTptb2RpZnkAMjAxNy0wMy0yNVQwMzo1Nzo0OCswODowMD+eocwAAAAASUVORK5CYII=" style="width:4rem;margin: 0 auto;margin-top: -1rem">
+                                <div style="font-size: 2rem;color: #009933;">微信记账</div>
+                                <div class="pay_select"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4  pay_style" data-pay_style="6">
+                        <div class="pay_order_div">
+                            <div style="display: table-cell;vertical-align: middle">
+                                <img src="data:image/png;base64,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" style="width:4rem;margin: 0 auto;margin-top: -1rem">
+                                <div style="font-size: 2rem;color:dodgerblue;">支付宝记账</div>
+                                <div class="pay_select"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-2">
+
+                    </div>
+                    <div class="col-sm-4  pay_style" data-pay_style="1">
+                        <div class="pay_order_div" style="margin-top: -2rem;">
+                            <div style="display: table-cell;vertical-align: middle">
+                                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAMAAACdt4HsAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAABGlBMVEUAAABPaLBPaLBPaLBPaLBPaLBPaLBPaLBPaLBPaLBPaLBPaLBPaLBPaLBPaLBPaLBPaLBPaLBPaLBPaLBPaLBPaLBPaLBPaLBPaLBPaLBPaLBPaLBPaLBPaLBPaLBPaLBPaLBPaLBPaLBPaLBPaLBPaLBPaLBPaLBPaLBPaLBPaLBPaLBPaLBPaLBPaLBPaLBPaLBPaLBPaLBPaLBPaLBPaLBPaLBPaLBPaLBPaLBPaLBPaLBPaLBPaLBPaLBPaLBPaLBPaLBPaLBPaLBPaLBPaLBPaLBPaLBPaLBPaLBPaLBPaLBPaLBPaLBPaLBPaLBPaLBPaLBPaLBPaLBPaLBPaLBPaLBPaLBPaLBPaLBPaLBPaLBPaLAAAADwTcOqAAAAXHRSTlMABWnq5WUELi0jIgDY28Pf1ywlJ3BFRZYSEpcRpqBFc1MFF/QzxgcQMxM5AfAOLlV2fa0HenSxAB9IXYEdjN35ldiSyIVffgYDORGWEXJAQC8eHgHkxK3EKTcLeLJ6AwEAAAABYktHRACIBR1IAAAAB3RJTUUH4QMZCDskdd9aEwAAATpJREFUWMPtlNdSwzAQRZfeCb0lQAi9915CAoQWeoAU/f93oJVkDwOxh1zBTIbReVg9rO4ZeyWbyOGoFmpq6wRCfUOjyjdBaU2zzLdY5IVopbZ2Xjs6KyfCwS7q5qUHml0vR6lPln5w+gMsGJRlCBQMs2BEligoiHqC2ChGzBPY4ARVI7C+SP9IMDYen7AQJCZ5qlO4YFqfywwqmDUHO4cK5o1gARUsLmnBMjyDFZVf9bplru1auGBdbdrYDBZshQq2za6dXUyw52/b192Dw28chQmOfcEJNsTPn3jQKxiStgLxN4JTv53S3fRZEOflj/HC5DOX6E0kurq++fk9pt/6I93KkgUFWRbcyXIPCh5Y8MiDe4Lyz+pIX3K8vL5VzjsHc0R5YUNePknBIl9Q71IsgfFSEZy+w/GVD1eC/ARCTqriAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDE3LTAzLTI1VDA4OjU5OjM2KzA4OjAw7TnkJAAAACV0RVh0ZGF0ZTptb2RpZnkAMjAxNy0wMy0yNVQwODo1OTozNiswODowMJxkXJgAAAAASUVORK5CYII=" style="width:4rem;margin: 0 auto;margin-top: -1rem">
+                                <div style="font-size: 2rem;color:black;">刷卡收入</div>
+                                <div class="pay_select"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4  pay_style" data-pay_style="4">
+                        <div class="pay_order_div" style="margin-top: -2rem;">
+                            <div style="display: table-cell;vertical-align: middle">
+                                <img src="data:image/png;base64,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" style="width:4rem;margin: 0 auto;margin-top: -1rem">
+                                <div style="font-size: 2rem;color:saddlebrown;">其他收入</div>
+                                <div class="pay_select"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+
+                    </div>
+
+                </div>
+            </div>
+            <button class="button button-highlight button-rounded order_esc" style="width: 100%;height: 6rem;font-size: 4rem;font-weight:400;margin-top: 1rem">返回</button>
+            <div class="keydiv disnone" id="order_comfirm"></div>
+
+        </div>
+        <div class="pay_ok disnone" style="width:100%;height:calc(100% - 10rem);position: absolute;bottom: 5rem;z-index:9;background-color: white;margin: 0 auto;text-align: center">
+            <div style="margin-top: 25%;margin-bottom: 2rem"><img src="data:image/png;base64,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" ></div>
+            <p><span style="font-size: 2rem;">支付成功，按回车(确认)返回</span></p>
+        </div>
+        <div class="foot" style="border: solid;border-color: #009933;border-width: 1px 0 0 0;position:absolute;bottom:0;height: 5rem;width: 100%;line-height: 5rem;color: white;text-align: center;font-size: 2rem;border-radius: 0rem 0rem 0.5rem 0.5rem">
+            <div class="row">
+                <div class="col-sm-6" style="height:5rem;border: solid;border-color: #009933;border-width: 0 1px 0 0;">
+                    <div class="alert disnone alert-danger alert-dismissible order_msg " role="alert" style="height:5rem;margin-left: 1rem;margin-bottom: 0rem;padding: 0">
+                        <strong>提示:</strong><span class="msgtxt"></span>
+                    </div></div>
+                <div class="col-sm-6"><span class="pay_status">等待支付</span></div>
+            </div>
+        </div>
+    </div>
+    <div id="direct_cash" class="disnone" style="background-color:darkgrey;position: absolute;z-index: 8;top:10rem;right:42.5%;height:calc(100% - 16.75rem);width:57%;border-radius: 1rem 1rem 1rem 1rem">
+        <div class="head" style="height: 4rem;width: 100%;line-height: 4rem;background-color:#009933;color: white;text-align: center;font-size: 2rem;border-radius: 1rem 1rem 0 0">直接收银</div>
+        <div style="font-size: 3rem;padding: 1rem;margin: 0 auto;text-align: center">
+            <div style="margin-top: 4rem;margin-bottom:2rem;font-size: 2rem;color: white">请输入收款金额</div>
+            <div class="keydiv" id="in_dpay" style="border-style: solid;border-radius: 1rem 1rem 1rem 1rem;border-width: 5px;border-color: #e20000;margin-bottom: 4rem">
+            </div>
+            <button type="button" class="btn btn-default d_cancel" style="width: 16rem;height: 8rem;font-size: 4rem;margin: 1rem">取消</button>
+            <button type="button" class="btn btn-danger d_ok" style="width: 16rem;height: 8rem;font-size: 4rem;margin: 1rem">确认</button>
+        </div>
+        <div class="foot" style="position:absolute;bottom:0;height: 4rem;width: 100%;line-height: 4rem;background-color:#009933;color: white;text-align: center;font-size: 2rem;border-radius: 0rem 0rem 1rem 1rem"></div>
+    </div>
+    <div id="net_order_win"  style="z-index:6;font-size:2rem;background-color:darkgrey;position: absolute;top:10rem;right:100%;height:calc(100% - 16.75rem);width:58%;border-radius: 0 1rem 1rem 0">
+        <div style="display:flex;height: 5rem;line-height: 4rem;font-size: 2rem;padding-left:4rem;padding-top:0.5rem;padding-bottom:0.5rem;background-color:rgba(40, 159, 246, 1);color: white;text-align:center;justify-content:space-around;border-radius: 0 1rem 0 0 ">
+            <span>网络订单详情及处理</span><button class="btn  btn-primary hide_finished" data-hide="false">隐藏已完成订单</button>
+        </div>
+        <div style="padding-left:2rem;padding-right:1rem;height:calc(100% - 10rem);background-color:#EEEEEE;overflow-y: auto;overflow-x: hidden;" id="net_order_cont">
+        </div>
+        <div style="height: 5rem;line-height: 5rem;font-size: 2rem;background-color:rgba(40, 159, 246, 1);color: white;text-align: center;border-radius: 0 0 1rem 0 ">
+            <span class="glyphicon glyphicon-arrow-left"></span>  只显示最近50个，向左滑动收起
+        </div>
+    </div>
+    <div id="last_30"  style="z-index:6;font-size:2rem;background-color:darkgrey;position: absolute;top:10rem;right:100%;height:calc(100% - 16.75rem);width:58%;border-radius: 0 1rem 1rem 0">
+        <div style="height: 5rem;line-height: 5rem;font-size: 2rem;background-color:rgb(217, 83, 79);color: white;text-align:center;border-radius: 0 1rem 0 0 ">
+            订单收银调整，主要用于外送单修改收银方式,银台扫码支付的不能更改.
+        </div>
+        <div style="padding-left:2rem;padding-right:1rem;height:calc(100% - 10rem);background-color:#EEEEEE;overflow-y: auto;overflow-x: hidden;" id="last_30_cont">
+        </div>
+        <div style="height: 5rem;line-height: 5rem;font-size: 2rem;background-color:rgb(217, 83, 79);color: white;text-align: center;border-radius: 0 0 1rem 0 ">
+            <span class="glyphicon glyphicon-arrow-left"></span>  只显示最近30个，微信和支付宝刷卡不可更改。
+        </div>
+    </div>
+</div>
+</body>

@@ -1,0 +1,301 @@
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,maximum-scale=1, user-scalable=no">
+    <title>壹尺生活，精彩无限</title>
+    <link rel="stylesheet" href="css/my.css"/>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/buttons.css"/>
+    <link rel="stylesheet" href="css/font-awesome.min.css"/>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+<!--
+    <script src="https://cdn.jsdelivr.net/bluebird/latest/bluebird.min.js"></script>
+-->
+</head>
+<body style="overflow:hidden;background-color: rgb(51,51,51);color: whitesmoke">
+<audio src="wav/ready.wav" preload="auto" loop="loop" id="wait_mp3"></audio>
+<div class="container-fluid">
+    <div class="row" style="height: 4rem;line-height: 4rem;font-size: 2rem;background-size:cover;background-image:url('https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1489699979&di=4a7cb77eec6609ccde2cf404beab0542&imgtype=jpg&er=1&src=http%3A%2F%2Fpic.58pic.com%2F00%2F94%2F40%2F13bOOOPICab.jpg');color: white">
+        <div class="col-md-2 col-xs-2 go_back" >
+            <i class="glyphicon glyphicon-th-list dropdown-toggle dropdown" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="line-height: 4rem"></i>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                <!--<li><a href="#" onclick="{check_register()}">注册新店铺</a></li>-->
+                <li><a href="#" onclick="_alert('<div style=text-align:left;color:black><p>本页要点：</p><p>1、您必须是店主，或是店主授权的营业员，方可登录。</p><p>2、店主请在手机公众账号[壹尺生活]-店主工具中，增加相应的营业员(即订单管理员)，方可在此登录。</p><p>3、如果您还没有店铺，请联系平台申请开通店铺，再使用本系统。平台联系方式在本页最下方。</p></div>')">使用帮助</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="#" onclick="{window.location.href='http://yichihui.com/shop_man_login'}">进入店铺管理系统</a></li>
+                <!--<li><a href="#" onclick="{app.quit()}">重置并退出</a></li>-->
+                <li><a href="#" onclick="{try{app.quit()}catch (err){window.close()}}">直接退出</a></li>
+            </ul>
+        </div>
+        <div class="col-md-8 col-xs-8"><div class="header" style="text-align: center;">壹尺生活便捷收银系统</div></div>
+        <div class="col-md-2 col-xs-2" onclick="{window.location.reload()}" style="text-align: right"><i style="line-height: 4rem" class="glyphicon glyphicon-refresh"></i> </div>
+    </div>
+</div>
+<div class="page login" style="height: auto">
+    <div style="text-align: center;margin:0 auto;padding:1rem;padding-top:2%">
+        <p><h4>请用微信扫一扫，登录收银系统</h4></p><br>
+        <div style="text-align: center;margin:0 auto;width:200px;background-color: white;"><img  src="images/微信登录.png" style="width:200px"></div>
+        <div style="text-align: center;margin:0 auto;width:200px;height:200px;background-color: white;margin-top: -2rem"><img class="qr_img" src="" style="width: 100%">
+            <div class="progress" style="margin:0 auto;text-align:center;width:100%;border-radius: 0" >
+                <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" style="width: 100%;">
+                </div>
+            </div>
+        </div>
+
+        <div style="text-align: center;margin:0 auto;width:20rem;margin-top: 5rem" class="shop-sel"></div>
+        <div class="pay_action disnone" style="text-align: center;margin:0 auto;margin-top: -3rem">
+            <div class="btn btn-danger btn-lg do_go"  onclick="{window.location.href='cash.html'}">网络错误，点击这里直接进入离线收银</div>
+            <br><div class="btn btn-primary btn-lg do_go" style="margin-top: 1rem"  onclick="{window.location.reload()}">或者点我刷新重试</div>
+            <div style="font-size: 2rem;color:black;margin-top: 1rem"><p><span style="color: red">重要提示：</span>离线版本无法进行网络在线支付，无法在银台获得网络订单，请关注您的手机通知。</p></div>
+        </div>
+<!--
+        <div class="btn btn-primary btn-lg" onclick="{window.location.href='dpay.html'}" style="margin-top: 1rem">我是店主，我要绑定支付</div>
+-->
+        <div class="btn btn-warning btn-lg" onclick="{window.location.href='cash.html'}" style="margin-top: 1rem">直接用上次身份进入</div>
+    </div>
+</div>
+<div class="modal" tabindex="-1" role="dialog" id="_alert" style="margin-top: 20%">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="text-align: center;color: white;background-color: #009933">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" >错误提示</h4>
+            </div>
+            <div class="modal-body" style="text-align: center">
+                <p>One fine body&hellip;</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger active" data-dismiss="modal">关闭</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div style="position: absolute; left: 0; right: 0; bottom:0;margin: auto 0;font-size: small;text-align: center;color: whitesmoke">
+    <p>北京壹尺生活电子商务有限公司©2014-2017版权所有 </p>
+    <p>京ICP备15064746号</p>
+    <p><i class="glyphicon glyphicon-phone" ></i> 010-86467908</p>
+</div>
+
+</body>
+<script>
+    var ws_status=false
+    var nwjs=true
+    try{
+        var http = require('http');
+        var fs = require('fs');
+        var gui=require('nw.gui');
+        var win=gui.Window.get();
+        var app=gui.App
+        var ws;
+        win.maximize()
+    }catch (err){
+        nwjs=false;
+    }
+
+    $(document).ready(function(){
+        wait_mp3 = document.getElementById('wait_mp3')
+        new_ws()
+        do_login()
+    })
+    function do_login(){
+        std_ajax({id:'create_login_code'},function(data){
+            code=data.code
+            $(".qr_img").attr('src',data.qr_img)
+            $.when(wait_ws_code(data.code,Date.parse(new Date())))
+                .done(function(data){
+                    wait_mp3.pause()
+                    scan_data=data
+                    var shops=data.shops
+                    if(shops.length==0){
+                        _alert('您无权登录本系统，如果确认是员工，请联系店主，在手机上添加您为营业员。')
+                        $(".qr_img").attr('style','padding:5rem').attr('src','data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAQAAAD9CzEMAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QAAKqNIzIAAAAHdElNRQfhAwoEGCsQfzH2AAADIklEQVRYw+2YXWwMURTHf6tSgraosPUgDSFp4nuJ9d0mKpR0RXzERxQRQpq6mnggHiWo0BMi2sRDhaSKJkrSljZCI7EIjQith0rEg48GDZLG53rYnd2Z7uzu3e28cZ7uOfee33/OmZm9d9aFA6YyOM1KjnNCfvWdG+CEAI2UkM1RbkRPuRy4/jxehB2vPLDODtQAZLOYqUzCzSB6eUcXHTyVjvCCg6bF11WO/NGuQC2mnOI4C85wiZd8sMTWylUtAbWWyyn2bIj0JmiRmkgr41LEQxnH4lagVlOfMjxobnlvDKMeU7W733g4GrMCtYXz/cYDTJbnNgLKy31H8NDOTOnbIpXpGB5msCQ4MD9FFTYLW+jkIzCCCcxjZBISLSpdfpoEVB67TNMNnJLb0VkqkyK2U6glUcI50z1QLUZRVHJYPsXPVYUcYlEiBXGFK1DjQ/iPLJBOjat7lBgfNOMmlwJwgRwtPJTo4UMtUul8B4R9opUUWp/Ilkuz0aKZQB3lenhgTtzZLmpo5ZH8BkNgAz/ZJgFdPm7b6D1qaaPL/FtqCJQx3RpOYPcsXj31+HkTvR9HBC7K0yTwyFs1nCKyeE07H6w72H/7x0zt1Th4qTRyKcDDL65IW1L4LHrEFfPgpVzkMJ9N+MKhUpUvd5NQqOC5zbFFQTazWMMOm5QCtAVUMTspswioDKZQzF4Gx8zq0CAHWR4agMbIfjCMajYmzGvSxM/mIRDgVWQ/aNLAV8kXLfw6HgJQKoFIixZoZFZqwMdQxaqQUwuRCn5rCOxXc+PCx6oTvAvjK+UzhN8DtZSbOuUDz6jlPnfEjPZSQDmjLOtGS7dZAO7qbuNatkfOBgehFglsdRD/gmpjmGYM/D1eyHdIYJp8NYbm43tFCig7my5vI45JQHpZ4QDeY91+rR8gjaFXJFXrJleeWEMWAYFN/cAfwC2v+wbTrK7/kzedhSnAT+KTW36bk1XUhqOG8s0SOMJBluFjM8Ns0XXUSHNsZbuvTB/XTG6uuWyVhYdMBvKDHtpEozQ7ARftTAs5j2VWCg0zmc2/LRJgfdjZ3z88/AWtDcrpkXnhkgAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAxNy0wMy0xMFQwNDoyNDo0MyswODowMNp4Y8AAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMTctMDMtMTBUMDQ6MjQ6NDMrMDg6MDCrJdt8AAAAAElFTkSuQmCC')
+                        $(".qr_img").one('click',function(){
+                            ws.close()
+                            window.location.reload()
+                        })
+                    }
+                    if(shops.length==1){
+                        window.localStorage.setItem('shop_id',shops[0].shop_id)
+                        window.localStorage.setItem('oper_openid', JSON.stringify(_data.openid))
+                        window.localStorage.setItem('nickname', JSON.stringify(_data.nickname))
+                        window.localStorage.setItem('headimgurl', JSON.stringify(_data.headimgurl))
+                        window.localStorage.setItem('shop_name', JSON.stringify(shops[0].shop_name))
+                        ws.close()
+                        window.location.href="cash.html";
+                    }
+                    else{
+                        $(".progress").remove()
+                        var _txt='<select class="form-control" style="text-align: center;margin-top: -3rem;font-size: 2rem;height: 4rem" ><option value=0>请选择您要登录的店铺</option>'
+                        shops.map(function(value){
+                            _txt+='<option value="'+value.shop_id+'">'+value.shop_name+'</option>'
+                        })
+                        _txt+='</select>'
+                        $(".shop-sel").html(_txt)
+                        $(".shop-sel select").on('change',function(){
+                            var _shop_id=$(this).val()
+                            window.localStorage.setItem('oper_openid', JSON.stringify(data.openid))
+                            window.localStorage.setItem('nickname', JSON.stringify(data.nickname))
+                            window.localStorage.setItem('headimgurl', JSON.stringify(data.headimgurl))
+                            window.localStorage.setItem('shop_name', JSON.stringify($(".shop-sel option:selected").html()))
+                            window.localStorage.setItem('shop_id', _shop_id)
+                            ws.close()
+                            window.location.href='cash.html'
+                        })
+                    }
+                })
+                .fail(function(data){
+                    _alert(data)
+                    $(".qr_img").attr('style','padding:5rem').attr('src','data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAQAAAAAYLlVAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QAAKqNIzIAAAAHdElNRQfhAx0IFw9vMF+qAAAC70lEQVRo3u2YS0hUURiAPyvCIIOCFpUmSOGiWpiWBaH+hGItigHRXmIRlT2EqFVtrHYRbaZELBdhmLQwCiItyl8xKlNqkQTiKioje0BppWRNmzN3rqMjo/eOg3T/zX/+xzn3O8977gVPPPHEk/9dEmLVsNZHDDXL9ZAxJ2Zd2xUx8sxuzIoZQJTiAcRuDYSkCoA8VsUJQI4BaPf40Zk4BXowYqhfbk8DADURI5eYNEDcp8ADcLYNg+f9jXgBNAig2U6aiPsUeAAeQNwBRm1DDUTMa5HNM2QENF0vaMDeFb2pOVGOgGNZqB2sH+MtpljhzXQA7JkgljoZAF/wYqG17J8SSgtKP0lksWPixFjcCX2j7kU7NYsrZERKdnsRVpMYfi2TLlnL3lgCLLBKZ6iiUnNHhzVTL9JPgeVIcxtgq9FNnKWbU7Sqbd5V6OIE9xii3LhK1E0ATeS4Ke6ToLNBzVVFc2mx+n2VPgCWsMbNEcg02i8fgRfGqtdS0Bxajf2NW/KXMmPZtqtzgC1G1wKwiU5j12kZbab8gzQZANqNfdhNgHyjewHkFzk8NZ5rRg+TKl8BZJhXACS5CbDaegwAMoTw2Bb/Q7J8sazO8OrOAeYZbb1+ZJiTtvgR+WyzfroP8M7o2UGHrqPDFq/Rcpu13H2AJ0YvMo/P5HlYRrUeNTHY5j5Ak9F5AJpBlxVZasUuawUAycZuCVV3DhBsrEoTCJ0DsEw+sJ27xvJrNqHtZ/u+dgwgb+kBYDE+mztZ+kB+4+OO8aRoKqdNudnNEYADRjfqCvOVmCLvDd4IRTQCg7RZx9B9+R6q7MZ9oN0q9ZIuu8NGaIQi0Pk8IMW4HtnjLoyA2I0eLR2boRsYYKNlDrkMECZ1GtAKNetd52qRvrYO53EkNr/p/Pg1ytTxAQq1MKragbDH9LJysqzjAxyaYs+bKeG89X6MSlxeA/JSCkggn3NxAgAQ5KFURps9egraI+Z9iiprMKqsYfc77YkD+Qc7NLmSrrrLlAAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAxNy0wMy0yOVQwODoyMzoxNSswODowMAfPr0YAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMTctMDMtMjlUMDg6MjM6MTUrMDg6MDB2khf6AAAAAElFTkSuQmCC')
+                    $(".qr_img").one('click',function(){
+                        ws.close()
+                        window.location.reload()})})
+            /*wait_ws_code(data.code,Date.parse(new Date()),function(data){
+                wait_mp3.pause()
+                scan_data=data
+                var shops=data.shops
+                if(shops.length==0){
+                    _alert('您无权登录本系统，如果确认是员工，请联系店主，在手机上添加您为营业员。')
+                    $(".qr_img").attr('style','padding:5rem').attr('src','data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAQAAAD9CzEMAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QAAKqNIzIAAAAHdElNRQfhAwoEGCsQfzH2AAADIklEQVRYw+2YXWwMURTHf6tSgraosPUgDSFp4nuJ9d0mKpR0RXzERxQRQpq6mnggHiWo0BMi2sRDhaSKJkrSljZCI7EIjQith0rEg48GDZLG53rYnd2Z7uzu3e28cZ7uOfee33/OmZm9d9aFA6YyOM1KjnNCfvWdG+CEAI2UkM1RbkRPuRy4/jxehB2vPLDODtQAZLOYqUzCzSB6eUcXHTyVjvCCg6bF11WO/NGuQC2mnOI4C85wiZd8sMTWylUtAbWWyyn2bIj0JmiRmkgr41LEQxnH4lagVlOfMjxobnlvDKMeU7W733g4GrMCtYXz/cYDTJbnNgLKy31H8NDOTOnbIpXpGB5msCQ4MD9FFTYLW+jkIzCCCcxjZBISLSpdfpoEVB67TNMNnJLb0VkqkyK2U6glUcI50z1QLUZRVHJYPsXPVYUcYlEiBXGFK1DjQ/iPLJBOjat7lBgfNOMmlwJwgRwtPJTo4UMtUul8B4R9opUUWp/Ilkuz0aKZQB3lenhgTtzZLmpo5ZH8BkNgAz/ZJgFdPm7b6D1qaaPL/FtqCJQx3RpOYPcsXj31+HkTvR9HBC7K0yTwyFs1nCKyeE07H6w72H/7x0zt1Th4qTRyKcDDL65IW1L4LHrEFfPgpVzkMJ9N+MKhUpUvd5NQqOC5zbFFQTazWMMOm5QCtAVUMTspswioDKZQzF4Gx8zq0CAHWR4agMbIfjCMajYmzGvSxM/mIRDgVWQ/aNLAV8kXLfw6HgJQKoFIixZoZFZqwMdQxaqQUwuRCn5rCOxXc+PCx6oTvAvjK+UzhN8DtZSbOuUDz6jlPnfEjPZSQDmjLOtGS7dZAO7qbuNatkfOBgehFglsdRD/gmpjmGYM/D1eyHdIYJp8NYbm43tFCig7my5vI45JQHpZ4QDeY91+rR8gjaFXJFXrJleeWEMWAYFN/cAfwC2v+wbTrK7/kzedhSnAT+KTW36bk1XUhqOG8s0SOMJBluFjM8Ns0XXUSHNsZbuvTB/XTG6uuWyVhYdMBvKDHtpEozQ7ARftTAs5j2VWCg0zmc2/LRJgfdjZ3z88/AWtDcrpkXnhkgAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAxNy0wMy0xMFQwNDoyNDo0MyswODowMNp4Y8AAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMTctMDMtMTBUMDQ6MjQ6NDMrMDg6MDCrJdt8AAAAAElFTkSuQmCC')
+                    $(".qr_img").one('click',function(){
+                        ws.close()
+                        window.location.reload()
+                    })
+                }
+                if(shops.length==1){
+                    window.localStorage.setItem('shop_id',shops[0].shop_id)
+                    window.localStorage.setItem('oper_openid', JSON.stringify(_data.openid))
+                    window.localStorage.setItem('nickname', JSON.stringify(_data.nickname))
+                    window.localStorage.setItem('headimgurl', JSON.stringify(_data.headimgurl))
+                    window.localStorage.setItem('shop_name', JSON.stringify(shops[0].shop_name))
+                    ws.close()
+                    window.location.href="cash.html";
+                }
+                else{
+                    $(".progress").remove()
+                    var _txt='<select class="form-control" style="text-align: center;margin-top: -3rem;font-size: 2rem;height: 4rem" ><option value=0>请选择您要登录的店铺</option>'
+                    shops.map(function(value){
+                        _txt+='<option value="'+value.shop_id+'">'+value.shop_name+'</option>'
+                    })
+                    _txt+='</select>'
+                    $(".shop-sel").html(_txt)
+                    $(".shop-sel select").on('change',function(){
+                        var _shop_id=$(this).val()
+                        window.localStorage.setItem('oper_openid', JSON.stringify(data.openid))
+                        window.localStorage.setItem('nickname', JSON.stringify(data.nickname))
+                        window.localStorage.setItem('headimgurl', JSON.stringify(data.headimgurl))
+                        window.localStorage.setItem('shop_name', JSON.stringify($(".shop-sel option:selected").html()))
+                        window.localStorage.setItem('shop_id', _shop_id)
+                        ws.close()
+                        window.location.href='cash.html'
+                    })
+                }
+            },function(data){
+                _alert(data)
+                $(".qr_img").attr('style','padding:5rem').attr('src','data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAQAAAAAYLlVAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QAAKqNIzIAAAAHdElNRQfhAx0IFw9vMF+qAAAC70lEQVRo3u2YS0hUURiAPyvCIIOCFpUmSOGiWpiWBaH+hGItigHRXmIRlT2EqFVtrHYRbaZELBdhmLQwCiItyl8xKlNqkQTiKioje0BppWRNmzN3rqMjo/eOg3T/zX/+xzn3O8977gVPPPHEk/9dEmLVsNZHDDXL9ZAxJ2Zd2xUx8sxuzIoZQJTiAcRuDYSkCoA8VsUJQI4BaPf40Zk4BXowYqhfbk8DADURI5eYNEDcp8ADcLYNg+f9jXgBNAig2U6aiPsUeAAeQNwBRm1DDUTMa5HNM2QENF0vaMDeFb2pOVGOgGNZqB2sH+MtpljhzXQA7JkgljoZAF/wYqG17J8SSgtKP0lksWPixFjcCX2j7kU7NYsrZERKdnsRVpMYfi2TLlnL3lgCLLBKZ6iiUnNHhzVTL9JPgeVIcxtgq9FNnKWbU7Sqbd5V6OIE9xii3LhK1E0ATeS4Ke6ToLNBzVVFc2mx+n2VPgCWsMbNEcg02i8fgRfGqtdS0Bxajf2NW/KXMmPZtqtzgC1G1wKwiU5j12kZbab8gzQZANqNfdhNgHyjewHkFzk8NZ5rRg+TKl8BZJhXACS5CbDaegwAMoTw2Bb/Q7J8sazO8OrOAeYZbb1+ZJiTtvgR+WyzfroP8M7o2UGHrqPDFq/Rcpu13H2AJ0YvMo/P5HlYRrUeNTHY5j5Ak9F5AJpBlxVZasUuawUAycZuCVV3DhBsrEoTCJ0DsEw+sJ27xvJrNqHtZ/u+dgwgb+kBYDE+mztZ+kB+4+OO8aRoKqdNudnNEYADRjfqCvOVmCLvDd4IRTQCg7RZx9B9+R6q7MZ9oN0q9ZIuu8NGaIQi0Pk8IMW4HtnjLoyA2I0eLR2boRsYYKNlDrkMECZ1GtAKNetd52qRvrYO53EkNr/p/Pg1ytTxAQq1MKragbDH9LJysqzjAxyaYs+bKeG89X6MSlxeA/JSCkggn3NxAgAQ5KFURps9egraI+Z9iiprMKqsYfc77YkD+Qc7NLmSrrrLlAAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAxNy0wMy0yOVQwODoyMzoxNSswODowMAfPr0YAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMTctMDMtMjlUMDg6MjM6MTUrMDg6MDB2khf6AAAAAElFTkSuQmCC')
+                $(".qr_img").one('click',function(){
+                    ws.close()
+                    window.location.reload()})})*/
+
+        })
+    }
+    function wait_ws_code(code,stamp){
+        var ws=$.Deferred();
+            if(ws_status){
+                var t=setTimeout(function(){
+                    send({id:'ws_login_remove',data:{code:code}});
+                    clearInterval(_t);
+                    $("body").off('ws_login')
+                    ws.reject('超时啦，请刷新重来')
+                },120000)
+                var count=120
+                var _t=setInterval(function(){
+                    if(count>=0){
+                        if(count==60){
+                            $(".progress-bar").removeClass('progress-bar-success') .addClass('progress-bar-warning')
+                        }
+                        if(count==30){
+                            $(".progress-bar").removeClass('progress-bar-warning') .addClass('progress-bar-danger')
+                        }
+                        $(".progress-bar").attr("style",'width:'+count*100/120+'%')
+                    }
+                    count--;
+                },1000)
+                send({id:'ws_login',data:{code:code,stamp:stamp}})
+                $('body').off('ws_login').one('ws_login',function(){
+                    clearTimeout(t)
+                    clearInterval(_t)
+                    ws.resolve(ws_login_back)
+                })
+            }
+            else{
+                ws.reject('数据连接错误，请刷新重试')
+            }
+
+        return ws.promise()
+    }
+
+    function _alert(msg){
+        $("#_alert .modal-body").html('<p>'+msg+'</p>')
+        $("#_alert").modal()
+        $("#_alert .modal-footer button").focus()
+
+    }
+    function std_ajax(_data,_func){
+        $.ajax({type: "post",url: "http://yichihui.com/dlogin",data: _data,timeout:120000,
+            success: function (data, textStatus) {vvp=_data;_func(JSON.parse(data))}
+        });
+    }
+    function send(data) {
+        if(ws_status){
+            ws.send(JSON.stringify(data));
+        }
+    };
+
+    function exit() {
+        var r=ws.close();
+        console.log("退出", r);
+    }
+    function check_register(){
+        if(window.localStorage.getItem('shop_id')!=null||window.localStorage.getItem('oper_openid')!=null){
+            _alert("正在运营的系统,不能注册新店铺。请确认您是当前店主,并进入收银台，在左下角店铺名称上点击出现菜单,选择初始化系统之后,才可以重新注册绑定新店铺。")
+        }
+        else{
+            window.location.href="dpay.html"
+        }
+    }
+    function new_ws(){
+        ws = new WebSocket('ws://yichihui.com:3003','protocol');
+        ws.onopen = function() {
+            ws_status=true
+        };
+        ws.onmessage = function(evt) {
+            var in_data=JSON.parse(evt.data)
+            console.log(in_data)
+            switch(in_data.id){
+                case 'ws_login':
+                    ws_login_back=in_data.data
+                    $("body").trigger(in_data.id)
+                    break;
+                case 'pong':
+                    console.log(in_data.ids)
+                    break;
+            }
+        };
+        ws.onclose = function(evt) {
+            ws_status=false
+            console.log('断啦')
+        };
+        ws.onerror = function(evt) {
+            console.log('出错')
+            $(".qr_img").attr('style','padding:5rem').attr('src','data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAQAAAAAYLlVAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QAAKqNIzIAAAAHdElNRQfhAx0IFw9vMF+qAAAC70lEQVRo3u2YS0hUURiAPyvCIIOCFpUmSOGiWpiWBaH+hGItigHRXmIRlT2EqFVtrHYRbaZELBdhmLQwCiItyl8xKlNqkQTiKioje0BppWRNmzN3rqMjo/eOg3T/zX/+xzn3O8977gVPPPHEk/9dEmLVsNZHDDXL9ZAxJ2Zd2xUx8sxuzIoZQJTiAcRuDYSkCoA8VsUJQI4BaPf40Zk4BXowYqhfbk8DADURI5eYNEDcp8ADcLYNg+f9jXgBNAig2U6aiPsUeAAeQNwBRm1DDUTMa5HNM2QENF0vaMDeFb2pOVGOgGNZqB2sH+MtpljhzXQA7JkgljoZAF/wYqG17J8SSgtKP0lksWPixFjcCX2j7kU7NYsrZERKdnsRVpMYfi2TLlnL3lgCLLBKZ6iiUnNHhzVTL9JPgeVIcxtgq9FNnKWbU7Sqbd5V6OIE9xii3LhK1E0ATeS4Ke6ToLNBzVVFc2mx+n2VPgCWsMbNEcg02i8fgRfGqtdS0Bxajf2NW/KXMmPZtqtzgC1G1wKwiU5j12kZbab8gzQZANqNfdhNgHyjewHkFzk8NZ5rRg+TKl8BZJhXACS5CbDaegwAMoTw2Bb/Q7J8sazO8OrOAeYZbb1+ZJiTtvgR+WyzfroP8M7o2UGHrqPDFq/Rcpu13H2AJ0YvMo/P5HlYRrUeNTHY5j5Ak9F5AJpBlxVZasUuawUAycZuCVV3DhBsrEoTCJ0DsEw+sJ27xvJrNqHtZ/u+dgwgb+kBYDE+mztZ+kB+4+OO8aRoKqdNudnNEYADRjfqCvOVmCLvDd4IRTQCg7RZx9B9+R6q7MZ9oN0q9ZIuu8NGaIQi0Pk8IMW4HtnjLoyA2I0eLR2boRsYYKNlDrkMECZ1GtAKNetd52qRvrYO53EkNr/p/Pg1ytTxAQq1MKragbDH9LJysqzjAxyaYs+bKeG89X6MSlxeA/JSCkggn3NxAgAQ5KFURps9egraI+Z9iiprMKqsYfc77YkD+Qc7NLmSrrrLlAAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAxNy0wMy0yOVQwODoyMzoxNSswODowMAfPr0YAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMTctMDMtMjlUMDg6MjM6MTUrMDg6MDB2khf6AAAAAElFTkSuQmCC')
+            $(".pay_action").show()
+            $(".progress").remove()
+            ws_status=false
+
+        };
+    }
+
+</script>

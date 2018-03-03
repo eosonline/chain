@@ -1,0 +1,150 @@
+.point{
+    position: absolute;
+    top: 1.7rem;
+    right: 2rem;
+    width: 15px;
+    height: 15px;
+    border-radius: 7.5px;
+    border-style: solid;
+    border-width: 2px;
+    border-color: white;
+    background-color: red;
+}
+.disnone{
+    display: none;
+}
+.top_div{
+    position: relative;
+    width: 100%;
+    height: auto;
+}
+.mkey{
+}
+.keypad{
+    box-shadow: 0 5px #999;
+    text-align: center !important;
+    height: 18%;!important;
+    font-size: 3rem;
+    border-radius: 1rem;
+    background-color: black;
+    color: white;
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
+}
+.keypad:active {
+    color: red;
+    background-color: #1e1e1e;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+}
+.keypad1{
+    box-shadow: 0 5px #999;
+    text-align: center !important;
+    height: 18%;!important;
+    font-size: 3rem;
+    border-radius: 1rem;
+    background-color: black;
+    color: white;
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
+}
+.keypad1:active {
+    color: red;
+    background-color: #1e1e1e;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+}
+.no-gutter{
+    padding: 0.5rem!important;
+}
+.keydiv{
+    overflow: hidden;
+    width:100%;
+    text-align:center;
+    font-size:3rem;
+    line-height:8rem;
+    height:8rem;
+    user-modify: read-write-plaintext-only;
+    outline: 0;
+}
+.key_active{
+    background-color:white;
+}
+.key_active:after {
+    height: 8rem;
+    line-height: 8rem;
+}
+.trip{
+    background-color: #e5ffc1;
+}
+.all_tmp input{
+    border-color: red;
+}
+.from_all{
+    border-left: 0.3rem !important;
+    border-left-style: solid !important;
+    border-left-color: #e20000 !important;
+}
+.nowrap{
+    word-break:keep-all;/* 不换行 */
+    white-space:nowrap;/* 不换行 */
+    overflow:hidden;/* 内容超出宽度时隐藏超出部分的内容 */
+    text-overflow:ellipsis;
+    display: block;
+}
+.net_alert{
+    background-color: #e20000!important;
+    -webkit-animation:pulse 1s .2s infinite;
+    -moz-animation:pulse 1s .2s infinite;
+}
+@-webkit-keyframes pulse{
+    0%{-webkit-transform:scale(1)}
+    50%{-webkit-transform:scale(0.6)}
+    100%{-webkit-transform:scale(1)}
+}
+@-moz-keyframes pulse{
+    0%{-moz-transform:scale(1)}
+    50%{-moz-transform:scale(0.6)}
+    100%{-moz-transform:scale(1)}
+}
+.edit{
+    width: 100%;
+    text-align: center;
+    background-color: inherit;
+}
+span.form-control{
+    display: none;
+}
+.jtr{
+    width: 0;
+    height: 0;
+    border-top: 3rem solid transparent;
+    border-left: 3rem solid #013e15;
+    border-bottom: 3rem solid transparent;
+    border-right: 3rem solid transparent;
+}
+.pay_order_div{
+    margin:0 auto;
+    padding-top: 0rem;
+    color:white;
+    text-align:center;
+    font-size:4rem;
+    width: 12rem;
+    height: 12rem;
+    border-radius: 6rem;
+    background-color:white;
+    border-color:white;
+    display: table;
+    font-weight: 600;
+}
+.sel_pay{
+    background: -webkit-gradient(linear, 0% 81%, 0% 80%,from(red), to(white));
+}
+.pay_select{
+    margin:0 auto;
+    width:70%;
+    height: 1rem;
+}
+.ui-loader-default{ display:none}
+.ui-mobile-viewport{ border:none;}
+.ui-page {padding: 0; margin: 0; outline: 0}

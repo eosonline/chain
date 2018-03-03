@@ -1,0 +1,316 @@
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,maximum-scale=1, user-scalable=no">
+    <title>壹尺生活 精彩无限</title>
+    <link rel="stylesheet" href="css/my.css"/>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/buttons.css"/>
+    <link rel="stylesheet" href="css/font-awesome.min.css"/>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="js/swiper/swiper.css">
+    <script src="js/swiper/swiper.min.js"></script>
+</head>
+<body style="overflow:hidden;font-family: 微软雅黑;font-weight: 900;line-height: inherit;">
+<div style="width: 100%;height: 5rem;background-color: #009933;display: flex" class="header">
+
+    <div style="width: 20%;height:5rem;line-height:5rem;background-color: #013e15;display:inline-flex;justify-content:center">
+        <img src="images/yichi_logo.png" style="height:3rem;margin-top: 1rem">
+        <span style="font-size: 2rem;color:#e5e5e5">壹尺生活</span>
+    </div>
+    <div style="width: 3rem;height: 5rem" ><div style="width: 0;height: 0;border-top: 2.5rem solid transparent;border-left: 2.5rem solid #013e15;border-bottom: 2.5rem solid transparent;border-right: 2.5rem solid transparent;"></div>
+    </div>
+    <div style="width: calc(80% - 3rem);height: 5rem;background-color: #009933">
+        <div class="row">
+            <div class="col-sm-6" style="text-align: center;color: white"><span >共 </span><span class="count" style="color: #ec6c00;font-size: 4rem;">0</span><span> 件</span></div>
+            <div class="col-sm-6" style="text-align: center;color: white">合计:￥<span class="total" style="color: #ec6c00;font-size: 4rem;text-shadow: white 1px 0 0, white 0 1px 0, white -1px 0 0, white 0 -1px 0">0.00</span> 元</div>
+        </div>
+    </div>
+
+</div>
+<div style="display:flex;overflow: hidden">
+    <div style="position:relative;width: 20%;height: calc(100% - 10rem);background-color: #01250d;color: white;z-index:9" class="left">
+        <div style="text-align: center;font-size: 1.5rem;padding-top: 0.75rem;font-weight: 300;padding-left: 1rem;padding-right: 1rem">
+            销售清单
+            <hr style="margin-top:0.5rem;border-top: 1px dashed white">
+        </div>
+        <div style="font-weight: 100;font-size: 1rem;margin-top: -1rem" class="bill_detail">
+
+        </div>
+        <div style="position: absolute;bottom: 0;text-align: center;padding:2rem 2rem 0 2rem;">
+            <div style="width: 100%;background-color: #009933;color: white;border-radius: 0.5rem 0.5rem 0 0;padding-top: 0.3rem;padding-bottom: 0.3rem"><span style="font-size: 1.3rem;font-weight: 300">微信扫一扫，免费送货</span></div>
+            <img class="shop_qr" style="width: 100%" src="http://yichihui.com/yichi/shop_qr/50020.png">
+        </div>
+    </div>
+    <div style="width: 80%;height: calc(100% - 10rem);background-color: #009933;position: relative" class="right">
+        <div id='slider' class='swiper-container'>
+            <div class='swiper-wrapper'>
+                <div class="swiper-slide"><img data-ad="#" style="width: 100%" src="http://yichihui.com/shop_ads/sample.jpg"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div style="width: 100%;height:5rem;background-color: #009933;display: flex" class="footer">
+    <div  style="width:calc(20% + 3rem);height:5rem;line-height:5rem;font-size:2rem;display: inline-flex">
+        <div style="text-align: center;width: 100%;background-color:#013e15;"><span class="shop_name" style="color: #ec6c00"></span></div>
+        <div style="width: 3rem;height: 5rem" ><div style="width: 0;height: 0;border-top: 2.5rem solid transparent;border-left: 2.5rem solid #013e15;border-bottom: 2.5rem solid transparent;border-right: 2.5rem solid transparent;"></div></div>
+    </div>
+
+
+    <div id="sys_info1" style="width:calc(80% - 3rem);overflow: hidden;height:5rem;padding:0.5rem;line-height:4rem;display:inline-flex;float:right;;justify-content: center">
+        <div style="background-color: white;width:23rem;height:4rem;line-height:4rem;display: inline-flex;padding-left: 0.5rem;padding-right: 0.5rem;border-radius: 0.5rem;justify-content:center">
+            <img style="height: 3rem;margin-top: 0.5rem" src="data:image/gif;base64,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">
+            <span style="font-size: 2rem;color: darkgreen">重量</span>
+            <span style="font-size: 3rem;color: #ec6c00" class="scale_weight">00.000</span>
+            <span style="font-size: 2rem;color: darkgreen">千克</span>
+        </div>
+        <div style="background-color: white;width:20rem;height:4rem;line-height: 4rem;display: inline-flex;padding-left: 0.5rem;padding-right: 0.5rem;border-radius: 0.5rem;margin-left: 1rem;justify-content:center">
+            <span style="font-size: 2rem;color: darkgreen">单价</span>
+            <span style="font-size: 3rem;color: #ec6c00" class="scale_price">00.00</span>
+            <span style="font-size: 2rem;color: darkgreen">元</span>
+        </div>
+        <div style="background-color: white;width:20rem;height:4rem;line-height:4rem;display: inline-flex;padding-left: 0.5rem;padding-right: 0.5rem;border-radius: 0.5rem;margin-left: 1rem;justify-content:center">
+            <span style="font-size: 2rem;color: darkgreen">合计</span>
+            <span style="font-size: 3rem;color: #ec6c00" class="scale_total">0.00</span>
+            <span style="font-size: 2rem;color: darkgreen">元</span>
+        </div>
+    </div>
+
+</div>
+</body>
+<script>
+    var gui=require('nw.gui');
+    var win=gui.Window.get()
+    var http = require('http');
+    var ads=[]
+    var shop_detail={}
+    var local_ads=[]
+    function redraw_tmp_list(scan_list){
+        var _count=0
+        var _total=0
+        var _txt=''
+        scan_list.map(function(goods){
+            _count+=goods.count
+            _total+=goods.total
+            _txt+='<div class="row" style="width: 100%;margin-left: 0">\
+                <div class="col-sm-8 no-gutter" style="text-align:left;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">'+goods.name+'</div>\
+                <div class="col-sm-1 no-gutter" style="text-align: center">'+goods.count+'</div>\
+                <div class="col-sm-3 no-gutter" style="text-align: right">'+parseFloat(goods.total).toFixed(2)+'</div>\
+                </div>'
+        })
+        $('.bill_detail').html(_txt)
+        $(".count").html(_count)
+        $(".total").html(parseFloat(_total).toFixed(2))
+    }
+
+
+    $(document).ready(function() {
+        $("#sys_info1").hide()
+        win.isKioskMode = false
+        win.x = global.comm._x
+        win.y = global.comm._y
+        win.isKioskMode = true
+        active_swiper()
+
+        var shop_name=window.localStorage.getItem('shop_name')
+        if(shop_name!=null){
+            $(".shop_name").html(JSON.parse(shop_name))
+        }
+        global.comm.sub(function(data){
+            redraw_tmp_list(data)
+        })
+        /*global.comm.sub_change(function(data){
+            change_back(data)
+        })*/
+        global.comm.sub_close(function(){
+            gui.Window.get().close(true)
+        })
+        global.comm.sub_scale(function(onoff,data){
+            if(onoff){
+                $("#sys_info1").show()
+                $(".scale_weight").html(data[0])
+                $(".scale_price").html(data[1])
+                $(".scale_total").html(data[2])
+            }
+            else{
+                $("#sys_info1").hide()
+            }
+        })
+        global.comm.sub_eval(function(data){
+            eval(data)
+        })
+        global.comm.sub_ads(function(data){
+            if(data==''||data==JSON.stringify([])){
+                ads=['images/sample.jpg']
+                do_swiper(ads)
+            }
+            else{
+                if(window.navigator.onLine){
+                    ads=JSON.parse(data)
+                    var _ads=[]
+                    var p=[]
+
+                    ads.map(function(ad){
+                        _ads.push('http://yichihui.com/'+ad)
+                        p.push(get_base64('http://yichihui.com/'+ad))
+                    })
+                    Promise.all(p).then((_data)=>{
+                        window.localStorage.removeItem('ads')
+                        window.localStorage.setItem('ads',JSON.stringify(_data))
+                        local_ads=_data
+                        do_swiper(_data)
+                    })
+                        .catch(()=>{
+                            var _ads_local=window.localStorage.getItem('ads')
+                            if(_ads_local!=null){
+                                do_swiper(JSON.parse(_ads_local))
+                            }
+                            else{
+                                ads=['images/sample.jpg']
+                                do_swiper(ads)
+                            }
+                        })
+                }
+                else{
+                    var _ads_local=window.localStorage.getItem('ads')
+                    if(_ads_local!=null){
+                        local_ads=JSON.parse(_ads_local)
+                        do_swiper(JSON.parse(_ads_local))
+                    }
+                    else{
+                        ads=['images/sample.jpg']
+                        do_swiper(ads)
+                    }
+                }
+
+            }
+        })
+        global.comm.sub_cash(function(status){
+            in_cash(status)
+        })
+        redraw_tmp_list(global.comm.pull())
+        shop_detail=global.comm.get_shop()
+        if(shop_detail.qr_img!=''){
+            $(".shop_qr").attr('src','http://yichihui.com'+shop_detail.qr_img)
+        }
+        $(".shop_qr").error(function(){
+            var obj=$(this);
+            var _src=window.localStorage.getItem('qr')
+            if(_src!=null){
+                obj.attr('src',_src)
+            }
+        })
+        if(shop_detail.ads==''){
+            ads=['images/sample.jpg']
+            do_swiper(ads)
+        }
+        else{
+            ads=JSON.parse(shop_detail.ads)
+            var _ads=[]
+            var p=[]
+            ads.map(function(ad){
+                _ads.push('http://yichihui.com/'+ad)
+                p.push(get_base64('http://yichihui.com/'+ad))
+            })
+            Promise.all(p).then((data)=>{
+                window.localStorage.removeItem('ads')
+                window.localStorage.setItem('ads',JSON.stringify(data))
+                local_ads=data
+                do_swiper(data)
+            })
+                .catch(()=>{
+                var _ads_local=window.localStorage.getItem('ads')
+                    if(_ads_local!=null){
+                    local_ads=JSON.parse(_ads_local)
+                    do_swiper(JSON.parse(_ads_local))
+                    }
+                    else{
+                        ads=['images/sample.jpg']
+                        do_swiper(ads)
+                    }
+                })
+        }
+
+    })
+    function get_base64(url){
+        var rtn=new Promise((resolve,reject)=> {
+            var req=http.get(url,function(res){
+                var chunks = []; //用于保存网络请求不断加载传输的缓冲数据
+                var size = 0;　　 //保存缓冲数据的总长度
+                res.on('data',function(chunk){
+                    chunks.push(chunk);
+                    size += chunk.length;　　//累加缓冲数据的长度
+                });
+                res.on('end',function(err){
+                    if(err){reject()}
+                    else{
+                        var data = Buffer.concat(chunks, size);
+                        var base64Img ='data:' + 'image/png' + ';base64,' +  data.toString('base64');
+                        resolve(base64Img)
+                    }
+                });
+            });
+            req.on('error', function (e) {
+                reject()
+            });
+            req.end();
+        })
+        return rtn
+    }
+    function do_swiper(_ads){
+
+        var slides=[]
+        mySwiper.removeAllSlides();
+        _ads.map(function(ad){
+            slides.push('<div class="swiper-slide"><img data-ad="#" src="'+ad+'"></div>')
+        })
+        mySwiper.appendSlide(slides);
+        mySwiper.update();
+        mySwiper.destroy()
+        setTimeout(function(){active_swiper()},1000)
+
+    }
+    function active_swiper(){
+            var _width=document.body.clientWidth
+            var _height=document.body.clientHeight
+
+            if(_width/_height<1.6){
+                $(".swiper-slide img").css('height','100%').css('width','')
+                var _h=$(".right").height()
+                var _w=$(".right").width()
+                $(".swiper-slide img").css('margin-left',(_w-_h*1.6)/2)
+
+            }
+            else{
+                $(".swiper-slide img").css('width','100%').css('height','')
+            }
+            mySwiper = new Swiper('.swiper-container',{
+                //Your options here:
+                speed:3000,
+                autoplay:3000,
+                autoplayDisableOnInteraction:false,
+                direction:'vertical',
+                loop: true,
+                effect:'fade',
+            })
+
+
+    }
+    function in_cash(status){
+        var _img=''
+        if(local_ads.length>0){
+            _img=local_ads[0]
+        }
+        else{
+            _img='http://yichihui.com/'+ads[0]
+        }
+        if(status){
+            $(".right").append('<div class="bk" style="position: absolute;top: 0;left: 0;width: 100%;height: 100%;z-index: 10;background-color: black"><img style="width: 100%" src="'+_img+'"></div>')
+        }
+        else{
+            $(".bk").remove()
+        }
+    }
+
+</script>

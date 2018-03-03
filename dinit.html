@@ -1,0 +1,271 @@
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,maximum-scale=1, user-scalable=no">
+    <title>壹尺生活 精彩无限</title>
+    <link rel="stylesheet" href="css/my.css"/>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/buttons.css"/>
+    <link rel="stylesheet" href="css/font-awesome.min.css"/>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+</head>
+<body style="overflow:hidden;background-color:rgb(51,51,51);color:whitesmoke">
+<audio src="wav/ready.wav" preload="auto" loop="loop" id="wait_mp3"></audio>
+<div class="container-fluid">
+    <div class="row" style="height: 4rem;line-height: 4rem;font-size: 2rem;background-size:cover;background-image:url('images/green.png');color: white">
+        <div class="header" style="text-align: center;">壹尺生活收银系统-系统初始化</div>
+    </div>
+</div>
+<div class="page login" style="height: auto">
+    <div style="text-align: center;margin:0 auto;padding:1rem;padding-top:5%">
+        <p><h4>必须是店主才能初始化系统，请用微信扫一扫验证</h4></p><br>
+        <div style="text-align: center;margin:0 auto;width:200px;background-color: white;"><img  src="images/微信登录.png" style="width:200px"></div>
+        <div style="text-align: center;margin:0 auto;width:200px;height:200px;background-color: white;margin-top: -2rem"><img class="qr_img" src="" style="width: 100%"></div>
+        <div class="progress" style="margin:0 auto;text-align:center;width:20rem;margin-top: 2rem" >
+            <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" style="width: 100%">
+            </div>
+        </div>
+        <div style="text-align: center;margin:0 auto;width:20rem;margin-top: 5rem" class="shop-sel"></div>
+        <div class="pay_action disnone" style="text-align: center;margin:0 auto;margin-top: 1rem">
+            <div class="btn btn-danger btn-lg do_go">不开通直接进入店铺</div>
+            <div class="btn btn-success btn-lg do_wx">开通微信商户收款</div>
+            <div class="btn btn-primary btn-lg do_ali">开通支付宝商家收款</div>
+        </div>
+    </div>
+</div>
+<div class="modal" tabindex="-1" role="dialog" id="_alert" style="margin-top: 20%">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="text-align: center;color: white;background-color: #009933">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" >错误提示</h4>
+            </div>
+            <div class="modal-body" style="text-align: center">
+                <p>One fine body&hellip;</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger active" data-dismiss="modal">关闭</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div style="position: absolute; left: 0; right: 0; bottom:0;margin: auto 0;font-size: small;text-align: center">
+    <p>北京壹尺生活®电子商务有限公司©2014-2017 版权所有 </p>
+    <p>京ICP备15064746号</p>
+    <p><i class="glyphicon glyphicon-phone" ></i> 010-86467908</p>
+</div>
+
+</body>
+<script>
+    $(document).ready(function(){
+        wait_mp3 = document.getElementById('wait_mp3')
+        new_ws()
+        do_login()
+    })
+    function do_login(){
+        std_ajax({id:'create_login_code'},function(data){
+            code=data.code
+            $(".qr_img").attr('src',data.qr_img)
+            wait_ws_code(data.code,Date.parse(new Date()))
+                .then((_data)=>{
+                    wait_mp3.pause()
+                    scan_data=_data
+                    scan_data.shops.forEach(function(data,ind){
+                        if(data.openid!=scan_data.openid){
+                            scan_data.shops.splice(ind,1)
+                        }
+                    })
+                    var shops=_data.shops
+                    if(shops.length==0){
+                        _alert('您无权继续操作，请确认您是店主。')
+                            .then(()=>{
+                                $(".qr_img").attr('style','padding:5rem').attr('src','data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAQAAAD9CzEMAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QAAKqNIzIAAAAHdElNRQfhAwoEGCsQfzH2AAADIklEQVRYw+2YXWwMURTHf6tSgraosPUgDSFp4nuJ9d0mKpR0RXzERxQRQpq6mnggHiWo0BMi2sRDhaSKJkrSljZCI7EIjQith0rEg48GDZLG53rYnd2Z7uzu3e28cZ7uOfee33/OmZm9d9aFA6YyOM1KjnNCfvWdG+CEAI2UkM1RbkRPuRy4/jxehB2vPLDODtQAZLOYqUzCzSB6eUcXHTyVjvCCg6bF11WO/NGuQC2mnOI4C85wiZd8sMTWylUtAbWWyyn2bIj0JmiRmkgr41LEQxnH4lagVlOfMjxobnlvDKMeU7W733g4GrMCtYXz/cYDTJbnNgLKy31H8NDOTOnbIpXpGB5msCQ4MD9FFTYLW+jkIzCCCcxjZBISLSpdfpoEVB67TNMNnJLb0VkqkyK2U6glUcI50z1QLUZRVHJYPsXPVYUcYlEiBXGFK1DjQ/iPLJBOjat7lBgfNOMmlwJwgRwtPJTo4UMtUul8B4R9opUUWp/Ilkuz0aKZQB3lenhgTtzZLmpo5ZH8BkNgAz/ZJgFdPm7b6D1qaaPL/FtqCJQx3RpOYPcsXj31+HkTvR9HBC7K0yTwyFs1nCKyeE07H6w72H/7x0zt1Th4qTRyKcDDL65IW1L4LHrEFfPgpVzkMJ9N+MKhUpUvd5NQqOC5zbFFQTazWMMOm5QCtAVUMTspswioDKZQzF4Gx8zq0CAHWR4agMbIfjCMajYmzGvSxM/mIRDgVWQ/aNLAV8kXLfw6HgJQKoFIixZoZFZqwMdQxaqQUwuRCn5rCOxXc+PCx6oTvAvjK+UzhN8DtZSbOuUDz6jlPnfEjPZSQDmjLOtGS7dZAO7qbuNatkfOBgehFglsdRD/gmpjmGYM/D1eyHdIYJp8NYbm43tFCig7my5vI45JQHpZ4QDeY91+rR8gjaFXJFXrJleeWEMWAYFN/cAfwC2v+wbTrK7/kzedhSnAT+KTW36bk1XUhqOG8s0SOMJBluFjM8Ns0XXUSHNsZbuvTB/XTG6uuWyVhYdMBvKDHtpEozQ7ARftTAs5j2VWCg0zmc2/LRJgfdjZ3z88/AWtDcrpkXnhkgAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAxNy0wMy0xMFQwNDoyNDo0MyswODowMNp4Y8AAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMTctMDMtMTBUMDQ6MjQ6NDMrMDg6MDCrJdt8AAAAAElFTkSuQmCC')
+                                $(".qr_img").one('click',function(){
+                                    window.location.reload()
+                                })
+                            })
+
+                        return;
+                    }
+                    if(shops.length==1){
+                        var local_shop=window.localStorage.getItem('shop_id')
+                        if(local_shop!=shops[0].shop_id){
+                            _alert('本机不属于您，您无权初始化！')
+                                .then(()=>{window.history.go(-1)})
+                            return
+                        }
+                        _alert('还有一次机会，如果您现在反悔，请直接关闭程序，重新进入。否则按任意键即将初始化系统。')
+                            .then(()=>{
+                                clear_tbs()
+                                    .then(()=>{
+                                        window.indexedDB.deleteDatabase("shop");
+                                        window.localStorage.removeItem('shop_id')
+                                        window.localStorage.removeItem('oper_openid')
+                                        window.localStorage.removeItem('nickname')
+                                        window.localStorage.removeItem('headimgurl')
+                                        window.localStorage.removeItem('shop_name')
+                                        window.location.href="main.html";
+                                    })
+                            })
+
+
+                    }
+                    else{
+                        $(".progress").remove()
+                        var _txt='<select class="form-control" style="text-align: center;margin-top: -3rem;font-size: 2rem;height: 4rem" ><option value=0>请选择您要登录的店铺</option>'
+                        shops.map(function(value){
+                            _txt+='<option value="'+value.shop_id+'">'+value.shop_name+'</option>'
+                        })
+                        _txt+='</select>'
+                        $(".shop-sel").html(_txt)
+                        $(".shop-sel select").on('change',function(){
+                            var _shop_id=$(this).val()
+                            var local_shop=window.localStorage.getItem('shop_id')
+                            if(local_shop!=_shop_id){
+                                _alert('本机不属于您，您无权初始化！')
+                                    .then(()=>{window.history.go(-1)})
+                                return
+                            }
+                            _alert('还有一次机会，如果您现在反悔，请直接关闭程序，重新进入。否则按任意键即将初始化系统。')
+                                .then(()=>{
+                                    clear_tbs()
+                                        .then(()=>{
+                                            window.indexedDB.deleteDatabase("shop");
+                                            window.localStorage.removeItem('shop_id')
+                                            window.localStorage.removeItem('oper_openid')
+                                            window.localStorage.removeItem('nickname')
+                                            window.localStorage.removeItem('headimgurl')
+                                            window.localStorage.removeItem('shop_name')
+                                            window.location.href="main.html";
+                                        })
+                                })
+                        })
+                    }
+
+
+                })
+                .catch((data)=>{
+                    _alert(data)
+                    $(".qr_img").attr('style','padding:5rem').attr('src','data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAQAAAD9CzEMAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QAAKqNIzIAAAAHdElNRQfhAwoEGCsQfzH2AAADIklEQVRYw+2YXWwMURTHf6tSgraosPUgDSFp4nuJ9d0mKpR0RXzERxQRQpq6mnggHiWo0BMi2sRDhaSKJkrSljZCI7EIjQith0rEg48GDZLG53rYnd2Z7uzu3e28cZ7uOfee33/OmZm9d9aFA6YyOM1KjnNCfvWdG+CEAI2UkM1RbkRPuRy4/jxehB2vPLDODtQAZLOYqUzCzSB6eUcXHTyVjvCCg6bF11WO/NGuQC2mnOI4C85wiZd8sMTWylUtAbWWyyn2bIj0JmiRmkgr41LEQxnH4lagVlOfMjxobnlvDKMeU7W733g4GrMCtYXz/cYDTJbnNgLKy31H8NDOTOnbIpXpGB5msCQ4MD9FFTYLW+jkIzCCCcxjZBISLSpdfpoEVB67TNMNnJLb0VkqkyK2U6glUcI50z1QLUZRVHJYPsXPVYUcYlEiBXGFK1DjQ/iPLJBOjat7lBgfNOMmlwJwgRwtPJTo4UMtUul8B4R9opUUWp/Ilkuz0aKZQB3lenhgTtzZLmpo5ZH8BkNgAz/ZJgFdPm7b6D1qaaPL/FtqCJQx3RpOYPcsXj31+HkTvR9HBC7K0yTwyFs1nCKyeE07H6w72H/7x0zt1Th4qTRyKcDDL65IW1L4LHrEFfPgpVzkMJ9N+MKhUpUvd5NQqOC5zbFFQTazWMMOm5QCtAVUMTspswioDKZQzF4Gx8zq0CAHWR4agMbIfjCMajYmzGvSxM/mIRDgVWQ/aNLAV8kXLfw6HgJQKoFIixZoZFZqwMdQxaqQUwuRCn5rCOxXc+PCx6oTvAvjK+UzhN8DtZSbOuUDz6jlPnfEjPZSQDmjLOtGS7dZAO7qbuNatkfOBgehFglsdRD/gmpjmGYM/D1eyHdIYJp8NYbm43tFCig7my5vI45JQHpZ4QDeY91+rR8gjaFXJFXrJleeWEMWAYFN/cAfwC2v+wbTrK7/kzedhSnAT+KTW36bk1XUhqOG8s0SOMJBluFjM8Ns0XXUSHNsZbuvTB/XTG6uuWyVhYdMBvKDHtpEozQ7ARftTAs5j2VWCg0zmc2/LRJgfdjZ3z88/AWtDcrpkXnhkgAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAxNy0wMy0xMFQwNDoyNDo0MyswODowMNp4Y8AAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMTctMDMtMTBUMDQ6MjQ6NDMrMDg6MDCrJdt8AAAAAElFTkSuQmCC')
+                    $(".qr_img").one('click',function(){
+                        window.location.reload()})
+                })
+
+        })
+    }
+    function wait_ws_code(code,stamp){
+        var rtn=new Promise((resolve,reject)=>{
+            if(ws_status){
+                var t=setTimeout(function(){
+                    send({id:'ws_login_remove',data:{code:code}});
+                    clearInterval(_t);
+                    $("body").off('ws_login')
+                    reject('超时啦，请刷新重来')
+                },120000)
+                var count=120
+                var _t=setInterval(function(){
+                    if(count>=0){
+                        if(count==60){
+                            $(".progress-bar").removeClass('progress-bar-success') .addClass('progress-bar-warning')
+                        }
+                        if(count==30){
+                            $(".progress-bar").removeClass('progress-bar-warning') .addClass('progress-bar-danger')
+                        }
+                        $(".progress-bar").attr("style",'width:'+count*100/120+'%')
+                    }
+                    count--;
+                },1000)
+                send({id:'ws_login',data:{code:code,stamp:stamp}})
+                $('body').off('ws_login').one('ws_login',function(){
+                    clearTimeout(t)
+                    clearInterval(_t)
+                    resolve(ws_login_back)
+                })
+            }
+            else{
+                reject('数据连接错误，请刷新重试')
+            }
+
+        })
+        return rtn
+    }
+    function _alert(msg){
+        $("#_alert .modal-body").html('<p>'+msg+'</p>')
+        $("#_alert").modal()
+        $("#_alert .modal-footer button").focus()
+        var rtn= new Promise((resolve,reject)=>{
+
+            $('#_alert').off('hidden.bs.modal').on('hidden.bs.modal', function (e) {
+                console.log('fff')
+                resolve()
+            })
+        })
+        return rtn
+    }
+    function std_ajax(_data,_func){
+        $.ajax({type: "post",url: "http://yichihui.com/dlogin",data: _data,timeout:120000,
+            success: function (data, textStatus) {vvp=_data;_func(JSON.parse(data))}
+        });
+    }
+    function send(data) {
+        if(ws_status){
+            ws.send(JSON.stringify(data));
+        }
+    };
+
+    function exit() {
+        var r=ws.close();
+        console.log("退出", r);
+    }
+    function new_ws(){
+        ws = new WebSocket('ws://yichihui.com:3003','protocol');
+        ws.onopen = function() {
+            ws_status=true
+        };
+        ws.onmessage = function(evt) {
+            var in_data=JSON.parse(evt.data)
+            console.log(in_data)
+            switch(in_data.id){
+                case 'ws_login':
+                    ws_login_back=in_data.data
+                    $("body").trigger(in_data.id)
+                    break;
+                case 'pong':
+                    console.log(in_data.ids)
+                    break;
+            }
+        };
+        ws.onclose = function(evt) {
+            ws_status=false
+            console.log('断啦')
+            _alert('网络中断，将刷新页面重新登录。。。')
+            setTimeout(function(){window.location.reload()},5000)
+
+        };
+        ws.onerror = function(evt) {
+            console.log('出错')
+            ws_status=false
+        };
+    }
+    function clear_tbs(){
+        var rtn =new Promise(function(resolve,reject){
+            var req = indexedDB.open("shop");
+            req.onerror = function(event) {
+                reject('数据库打开错误');
+            };
+            req.onsuccess = function(event) {
+                var db=req.result
+                db.transaction("orders","readwrite").objectStore("orders").clear()
+                db.transaction("goods","readwrite").objectStore("goods").clear()
+                db.transaction("all_goods","readwrite").objectStore("all_goods").clear()
+                db.close()
+                resolve('ok')
+            }
+        })
+        return rtn
+    }
+
+</script>

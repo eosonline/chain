@@ -1,0 +1,14 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="JSDeclarationsAtScopeStart" enabled="false" level="INFO" enabled_by_default="false">
+      <scope name="Tests" level="INFO" enabled="false">
+        <option name="myMakeSingleVarStatement" value="true" />
+      </scope>
+    </inspection_tool>
+    <inspection_tool class="UnreachableCodeJS" enabled="true" level="INFO" enabled_by_default="true" />
+    <inspection_tool class="UnterminatedStatementJS" enabled="false" level="TYPO" enabled_by_default="false">
+      <option name="ignoreSemicolonAtEndOfBlock" value="true" />
+    </inspection_tool>
+  </profile>
+</component>

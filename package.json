@@ -1,0 +1,14 @@
+{
+  "name":"yichihui",
+  "main":"main_go.html",
+  "version":"1.0.0",
+  "window":{
+    "toolbar" : true,
+    "kiosk":true},
+  "permissions": [
+    "serial"
+  ],
+  "webkit": {
+    "plugin": true
+  }
+}
