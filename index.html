@@ -21,10 +21,16 @@
 </body>
 <script>
 $(document).ready(function(){
-    $("video").play()
-    $("video").addEventListener("ended",function(){
+    try{
+        $("video").play()
+        $("video").addEventListener("ended",function(){
             window.location.href='dlogin.html'
-    })
+        })
+    }
+    catch(err){
+        window.location.href='dlogin.html'
+    }
+
 })
 
 
