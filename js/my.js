@@ -1833,7 +1833,7 @@ function renew_goods(goods){
             }
         }
         else{
-            if(typeof(goods.pic)=='undefined'|| goods.pic==''){goods.pic='http://yichihui.com/goods_imgs/暂无图片.png'}
+            if(typeof(goods.pic)=='undefined'|| goods.pic==''){goods.pic='http://yichihui.com/goods_imgs/nopic.png'}
             else{
                 goods.pic='http://yichihui.com/goods_imgs/'+goods.pic
             }
@@ -3114,7 +3114,7 @@ function draw_scale_goods(){
         })
     }
     $("#scale_goods_list").html(_txt)
-    $("#scale_goods_list img").error(function(){$(this).attr('src','images/暂无图片.png')})
+    $("#scale_goods_list img").error(function(){$(this).attr('src','images/nopic.png')})
     goods_pvt.reverse()
 }
 function draw_no_bn_goods(){
@@ -3136,7 +3136,7 @@ function draw_no_bn_goods(){
         })
     }
     $("#no_bn_goods_list").html(_txt)
-    $("#no_bn_goods_list img").error(function(){$(this).attr('src','images/暂无图片.png')})
+    $("#no_bn_goods_list img").error(function(){$(this).attr('src','images/nopic.png')})
     goods_pvt.reverse()
 }
 function convertImgToBase64(url, callback, outputFormat){
@@ -3718,7 +3718,7 @@ function do_fast_query(txt){
         })
     }
     $("#no_bn_goods_list").html(_txt)
-    $("#no_bn_goods_list img").error(function(){$(this).attr('src','images/暂无图片.png')})
+    $("#no_bn_goods_list img").error(function(){$(this).attr('src','images/nopic.png')})
     $(".fast_query").show()
     goods_pvt.reverse()
 }
