@@ -15,5 +15,9 @@
     <author href="https://yichihui.com" email="zkm@yichihui.com">
         张康民
     </author>
+    <feature name="HybridBridge">
+        <param name="android-package" value="org.sample.hybridandroidapp.HybridBridge" />
+        <param name="onload" value="true"/>
+    </feature>
 
 </widget>
